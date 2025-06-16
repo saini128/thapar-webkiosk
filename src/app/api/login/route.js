@@ -2,9 +2,10 @@
 import { NextResponse } from 'next/server';
 import { storeOrUpdateCreds } from '@/lib/db/store_creds';
 import { generateJWT } from '@/lib/utils/jwt';
-import { REQUEST_HEADERS } from './constants.js';
+import { REQUEST_HEADERS } from '@/lib/webkiosk/constants.js';
 
 export async function GET(request) {
+    console.log('GET request to /api/login received. This endpoint is not intended for GET requests.');
     // This GET handler is not used in this context, but you can implement it if needed.
     return NextResponse.json({ message: 'GET method not supported for login.' }, { status: 405 });
 
@@ -30,8 +31,10 @@ export async function POST(request) {
         requestBody.append('Password', password);     // Dynamic from input
         requestBody.append('BTNSubmit', 'Submit');
 
-        
-        const headers = REQUEST_HEADERS;
+
+        const headers = {
+
+        }
 
         const externalResponse = await fetch('https://webkiosk.thapar.edu/CommonFiles/UserAction.jsp', {
             method: 'POST',
@@ -39,7 +42,7 @@ export async function POST(request) {
             body: requestBody.toString(),
             redirect: 'manual', // Crucial to capture 302 redirect and its headers
         });
-
+        console.log(`Payload sent to external API: ${requestBody.toString()}`);
         console.log(`External API Response Status: ${externalResponse.status}`);
         console.log(`External API Response Status Text: ${externalResponse.statusText}`);
 
@@ -66,12 +69,15 @@ export async function POST(request) {
             // console.log("External API Response Body (if any):", responseText);
 
             if (locationHeader && locationHeader.includes('/StudentFiles/StudentPage.jsp')) {
+                // Save creds in background
                 storeOrUpdateCreds({ enrollmentNo: memberCode, password }).catch(console.error);
 
-                const sessionCreatedAt = Date.now();
-                const token = await generateJWT({ enrollmentNo: memberCode, sessionId, sessionCreatedAt });
+                // JWT only contains the enrollmentNo
+                const token = await generateJWT({ enrollmentNo: memberCode });
+
                 const response = NextResponse.json({ success: true });
 
+                // ✅ Long-lived identity token
                 response.cookies.set('auth-token', token, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
@@ -79,8 +85,23 @@ export async function POST(request) {
                     maxAge: 60 * 60 * 24 * 100, // 100 days
                 });
 
+                // ✅ Short-lived session ID (re-auth every 30 min if needed)
+                response.cookies.set('X-Session-ID', sessionId, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    path: '/',
+                    maxAge: 60 * 30, // 30 minutes
+                });
+                response.cookies.set('X-Session-Issued-At', Date.now().toString(), {
+                    httpOnly: true,
+                    path: '/',
+                    maxAge: 60 * 30,
+                });
+
+
                 return response;
             }
+
             else {
                 // Redirected but not to student page, or other unexpected redirect
                 console.warn('Login attempt resulted in an unexpected redirect.');
@@ -99,7 +120,7 @@ export async function POST(request) {
         } else {
             // Not a 302, handle other responses (e.g., 200 OK with error message, 4xx, 5xx)
             const responseText = await externalResponse.text();
-            console.error(`External API did not redirect as expected. Status: ${externalResponse.status}, Body: ${responseText}`);
+            console.error(`External API did not redirect as expected. Status: ${externalResponse.status}`);
             return NextResponse.json(
                 {
                     success: false,

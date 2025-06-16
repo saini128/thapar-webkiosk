@@ -32,6 +32,8 @@ export const REQUEST_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
   'Referer': 'https://webkiosk.thapar.edu/CommonFiles/UserAction.jsp',
   'Host': 'webkiosk.thapar.edu',
+  'Content-Type':'application/x-www-form-urlencoded',
+  'Cache-Control': 'max-age=0',
   'Connection': 'keep-alive',
   'Upgrade-Insecure-Requests': '1',
   'Sec-Fetch-Dest': 'document',
