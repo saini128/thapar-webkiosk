@@ -32,9 +32,7 @@ export async function POST(request) {
         requestBody.append('BTNSubmit', 'Submit');
 
 
-        const headers = {
-
-        }
+        const headers = REQUEST_HEADERS; // Import your headers from constants.js
 
         const externalResponse = await fetch('https://webkiosk.thapar.edu/CommonFiles/UserAction.jsp', {
             method: 'POST',

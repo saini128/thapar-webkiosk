@@ -3,7 +3,7 @@ import { WEBKIOSK_URLS } from '../../../lib/webkiosk/constants.js';
 import { fetchWebKioskPage } from '../../../lib/webkiosk/fetcher.js';
 import { parseWebKioskHTML } from '../../../lib/webkiosk/parsers/index.js';
 import { createSuccessResponse, createErrorResponse, validateSessionId } from '../../../lib/utils/response.js';
-
+import { storeOrUpdateDashboard, getDashboard } from '@/lib/db/update_data.js';
 export async function GET(request) {
   // ✅ Validate session ID and handle refresh
   const session = await validateSessionId(request);
@@ -15,8 +15,57 @@ export async function GET(request) {
     );
   }
 
-  const { sessionId, refreshed, responseHeaders } = session;
+  const { sessionId, refreshed, responseHeaders, enrollmentNo } = session;
+  // Get all URLs to fetch
+  const urlsToFetch = Object.values(WEBKIOSK_URLS);
+  var result = await getDashboard(enrollmentNo);
+  const results = result ? result.data : {};
+  const errors = [];
+  
 
+  
+  const responseMessage = 'All dashboard data fetched and parsed successfully';
+
+  const response = NextResponse.json(
+    createSuccessResponse(
+      {
+        enrollmentNo: enrollmentNo,
+        results: results,
+        summary: {
+          total: urlsToFetch.length,
+          successful: urlsToFetch.length,
+          failed: errors.length,
+          errors: errors
+        }
+      },
+      responseMessage,
+    ),
+    { status: 200 }
+  );
+
+  // ✅ Attach refreshed cookie headers if applicable
+  if (refreshed && responseHeaders) {
+    responseHeaders.forEach((value, key) => {
+      response.headers.set(key, value);
+    });
+  }
+  console.log(`Session ID: ${sessionId}, Refreshed: ${refreshed}, Enrollment No: ${enrollmentNo}`);
+
+  return response;
+}
+
+export async function POST(request) {
+  // ✅ Validate session ID and handle refresh
+  const session = await validateSessionId(request);
+
+  if (!session) {
+    return NextResponse.json(
+      createErrorResponse('Session ID is required to fetch WebKiosk data. Please log in first.'),
+      { status: 401 }
+    );
+  }
+
+  const { sessionId, refreshed, responseHeaders, enrollmentNo } = session;
   // Get all URLs to fetch
   const urlsToFetch = Object.values(WEBKIOSK_URLS);
   const results = {};
@@ -100,9 +149,13 @@ export async function GET(request) {
     ? 'All dashboard data fetched and parsed successfully'
     : `Partial success: ${successfulRequests.length}/${urlsToFetch.length} requests completed successfully`;
 
+  if (urlsToFetch.length === successfulRequests.length) {
+    storeOrUpdateDashboard(enrollmentNo, results);
+  }
   const response = NextResponse.json(
     createSuccessResponse(
       {
+        enrollmentNo: enrollmentNo,
         results: results,
         summary: {
           total: urlsToFetch.length,
@@ -111,7 +164,7 @@ export async function GET(request) {
           errors: errors
         }
       },
-      responseMessage
+      responseMessage,
     ),
     { status: 200 }
   );
@@ -122,6 +175,7 @@ export async function GET(request) {
       response.headers.set(key, value);
     });
   }
+  console.log(`Session ID: ${sessionId}, Refreshed: ${refreshed}, Enrollment No: ${enrollmentNo}`);
 
   return response;
 }

@@ -1,0 +1,2022 @@
+{
+	"success": true,
+	"message": "All dashboard data fetched and parsed successfully",
+	"data": {
+		"enrollmentNo": "102203576",
+		"results": {
+			"https://webkiosk.thapar.edu/StudentFiles/PersonalFiles/StudPersonalInfo.jsp": {
+				"fetch": {
+					"status": 200,
+					"statusText": "OK",
+					"success": true,
+					"errorMessage": null,
+					"errorType": null,
+					"validationFailed": false
+				},
+				"parsed": {
+					"parsed": true,
+					"data": {
+						"name": "Hushraj Singh",
+						"course": "BE COE",
+						"semester": "6",
+						"contact": {
+							"student": {
+								"mobile": "7717644689",
+								"telephone": "-`+91-9417510220",
+								"email": [
+									"hushrajs@gmail.com",
+									"hsingh2_be22@thapar.edu"
+								]
+							},
+							"parent": {
+								"mobile": "9464002623",
+								"telephone": "-NA",
+								"email": "null"
+							}
+						},
+						"lms": {
+							"login": "hsingh2_be22@thapar.edu"
+						},
+						"address": {
+							"correspondence": {
+								"address": {
+									"address": "`vill. - Thali Khurd,",
+									"district": "",
+									"cityPin": "Rupnagar/140113",
+									"state": "Punjab"
+								}
+							},
+							"permanent": {
+								"address": {
+									"address": "`vill. - Thali Khurd,",
+									"district": "",
+									"cityPin": "Rupnagar/140113",
+									"state": "Punjab"
+								}
+							}
+						}
+					},
+					"error": null
+				}
+			},
+			"https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp?x=&exam=ALL": {
+				"fetch": {
+					"status": 200,
+					"statusText": "OK",
+					"success": true,
+					"errorMessage": null,
+					"errorType": null,
+					"validationFailed": false
+				},
+				"parsed": {
+					"parsed": true,
+					"data": [
+						{
+							"srNo": "1",
+							"examCode": "2223ODDSEM",
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"event": "SES#LE2",
+							"fullMarks": 10,
+							"obtainedMarks": 9,
+							"weightage": 10,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "2",
+							"examCode": "2324ODDSEM",
+							"subject": "DATA STRUCTURES(UCS301)",
+							"event": "SES#LE1",
+							"fullMarks": 15,
+							"obtainedMarks": 13,
+							"weightage": 15,
+							"effectiveMarks": 13,
+							"status": null
+						},
+						{
+							"srNo": "3",
+							"examCode": "2425EVESEM",
+							"subject": "COMPUTER GRAPHICS(UCS505)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 19,
+							"weightage": 40,
+							"effectiveMarks": 19,
+							"status": null
+						},
+						{
+							"srNo": "4",
+							"examCode": "2223EVESEM",
+							"subject": "PROFESSIONAL COMMUNICATION(UHU003)",
+							"event": "SES",
+							"fullMarks": 40,
+							"obtainedMarks": 29.5,
+							"weightage": 40,
+							"effectiveMarks": 29.5,
+							"status": null
+						},
+						{
+							"srNo": "5",
+							"examCode": "2223EVESEM",
+							"subject": "MATHEMATICS - II(UMA004)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 35.5,
+							"weightage": 50,
+							"effectiveMarks": 35.5,
+							"status": null
+						},
+						{
+							"srNo": "6",
+							"examCode": "2223EVESEM",
+							"subject": "MATHEMATICS - II(UMA004)",
+							"event": "SES#TUT1",
+							"fullMarks": 10,
+							"obtainedMarks": 9,
+							"weightage": 10,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "7",
+							"examCode": "2324ODDSEM",
+							"subject": "ENGINEERING MATERIALS(UES012)",
+							"event": "MST",
+							"fullMarks": 35,
+							"obtainedMarks": 22,
+							"weightage": 35,
+							"effectiveMarks": 22,
+							"status": null
+						},
+						{
+							"srNo": "8",
+							"examCode": "2324ODDSEM",
+							"subject": "ENGINEERING MATERIALS(UES012)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 5,
+							"weightage": 5,
+							"effectiveMarks": 2.5,
+							"status": null
+						},
+						{
+							"srNo": "9",
+							"examCode": "2425EVESEM",
+							"subject": "MICROPROCESSOR-BASED SYSTEMS DESIGN(UCS617)",
+							"event": "SES#LE1",
+							"fullMarks": 5,
+							"obtainedMarks": 2,
+							"weightage": 5,
+							"effectiveMarks": 2,
+							"status": null
+						},
+						{
+							"srNo": "10",
+							"examCode": "2324ODDSEM",
+							"subject": "ENGINEERING DESIGN PROJECT-I(MANGONEL)(UTA016)",
+							"event": "SES#TUT1",
+							"fullMarks": 50,
+							"obtainedMarks": 41.5,
+							"weightage": 50,
+							"effectiveMarks": 41.5,
+							"status": null
+						},
+						{
+							"srNo": "11",
+							"examCode": "2223EVESEM",
+							"subject": "OBJECT ORIENTED PROGRAMMING(UTA018)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 39.5,
+							"weightage": 40,
+							"effectiveMarks": 31.6,
+							"status": null
+						},
+						{
+							"srNo": "12",
+							"examCode": "2324ODDSEM",
+							"subject": "NUMERICAL ANALYSIS(UMA011)",
+							"event": "ENDSEM",
+							"fullMarks": 35,
+							"obtainedMarks": 12,
+							"weightage": 35,
+							"effectiveMarks": 12,
+							"status": null
+						},
+						{
+							"srNo": "13",
+							"examCode": "2324EVESEM",
+							"subject": "ENGINEERING DESIGN PROJECT - II(UTA024)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 38.5,
+							"weightage": 50,
+							"effectiveMarks": 38.5,
+							"status": null
+						},
+						{
+							"srNo": "14",
+							"examCode": "2425ODDSEM",
+							"subject": "COMPUTER ARCHITECTURE AND ORGANIZATION(UCS510)",
+							"event": "SES#QZ2",
+							"fullMarks": 15,
+							"obtainedMarks": 10,
+							"weightage": 15,
+							"effectiveMarks": 10,
+							"status": null
+						},
+						{
+							"srNo": "15",
+							"examCode": "2425EVESEM",
+							"subject": "INNOVATION AND ENTREPRENEURSHIP(UTA025)",
+							"event": "SES#LE1",
+							"fullMarks": 35,
+							"obtainedMarks": 25.8,
+							"weightage": 35,
+							"effectiveMarks": 25.8,
+							"status": null
+						},
+						{
+							"srNo": "16",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-I(UCS673)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 21.5,
+							"weightage": 30,
+							"effectiveMarks": 21.5,
+							"status": null
+						},
+						{
+							"srNo": "17",
+							"examCode": "2324ODDSEM",
+							"subject": "OPERATING SYSTEMS(UCS303)",
+							"event": "SES#LE1",
+							"fullMarks": 20,
+							"obtainedMarks": 17,
+							"weightage": 20,
+							"effectiveMarks": 17,
+							"status": null
+						},
+						{
+							"srNo": "18",
+							"examCode": "2425EVESEM",
+							"subject": "THEORY OF COMPUTATION(UCS701)",
+							"event": "SES#TUT1",
+							"fullMarks": 15,
+							"obtainedMarks": 12,
+							"weightage": 15,
+							"effectiveMarks": 12,
+							"status": null
+						},
+						{
+							"srNo": "19",
+							"examCode": "2223ODDSEM",
+							"subject": "APPLIED CHEMISTRY(UCB008)",
+							"event": "ENDSEM",
+							"fullMarks": 72,
+							"obtainedMarks": 30,
+							"weightage": 40,
+							"effectiveMarks": 16.66,
+							"status": null
+						},
+						{
+							"srNo": "20",
+							"examCode": "2223EVESEM",
+							"subject": "APPLIED PHYSICS(UPH004)",
+							"event": "ENDSEM",
+							"fullMarks": 100,
+							"obtainedMarks": 44,
+							"weightage": 40,
+							"effectiveMarks": 17.6,
+							"status": null
+						},
+						{
+							"srNo": "21",
+							"examCode": "2223EVESEM",
+							"subject": "APPLIED PHYSICS(UPH004)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 4,
+							"weightage": 10,
+							"effectiveMarks": 4,
+							"status": null
+						},
+						{
+							"srNo": "22",
+							"examCode": "2223EVESEM",
+							"subject": "PROFESSIONAL COMMUNICATION(UHU003)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 27.5,
+							"weightage": 35,
+							"effectiveMarks": 24.06,
+							"status": null
+						},
+						{
+							"srNo": "23",
+							"examCode": "2223EVESEM",
+							"subject": "ELECTRONIC ENGINEERING(UEC001)",
+							"event": "SES",
+							"fullMarks": 40,
+							"obtainedMarks": 32.5,
+							"weightage": 40,
+							"effectiveMarks": 32.5,
+							"status": null
+						},
+						{
+							"srNo": "24",
+							"examCode": "2223EVESEM",
+							"subject": "MATHEMATICS - II(UMA004)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 21.5,
+							"weightage": 30,
+							"effectiveMarks": 21.5,
+							"status": null
+						},
+						{
+							"srNo": "25",
+							"examCode": "2324EVESEM",
+							"subject": "ARTIFICIAL INTELLIGENCE(UCS411)",
+							"event": "SES#LE1",
+							"fullMarks": 15,
+							"obtainedMarks": 12.5,
+							"weightage": 15,
+							"effectiveMarks": 12.5,
+							"status": null
+						},
+						{
+							"srNo": "26",
+							"examCode": "2324ODDSEM",
+							"subject": "ENGINEERING MATERIALS(UES012)",
+							"event": "ENDSEM",
+							"fullMarks": 80,
+							"obtainedMarks": 35,
+							"weightage": 35,
+							"effectiveMarks": 15.31,
+							"status": null
+						},
+						{
+							"srNo": "27",
+							"examCode": "2324EVESEM",
+							"subject": "DATABASE MANAGEMENT SYSTEM(UCS310)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 17.5,
+							"weightage": 40,
+							"effectiveMarks": 17.5,
+							"status": null
+						},
+						{
+							"srNo": "28",
+							"examCode": "2425EVESEM",
+							"subject": "OPTIMIZATION TECHNIQUES(UMA035)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 26,
+							"weightage": 40,
+							"effectiveMarks": 26,
+							"status": null
+						},
+						{
+							"srNo": "29",
+							"examCode": "2425EVESEM",
+							"subject": "OPTIMIZATION TECHNIQUES(UMA035)",
+							"event": "SES",
+							"fullMarks": 30,
+							"obtainedMarks": 28,
+							"weightage": 30,
+							"effectiveMarks": 28,
+							"status": null
+						},
+						{
+							"srNo": "30",
+							"examCode": "2223ODDSEM",
+							"subject": "MATHEMATICS I(UMA010)",
+							"event": "SES#TUT2",
+							"fullMarks": 10,
+							"obtainedMarks": 5.5,
+							"weightage": 10,
+							"effectiveMarks": 5.5,
+							"status": null
+						},
+						{
+							"srNo": "31",
+							"examCode": "2324ODDSEM",
+							"subject": "ENGINEERING DESIGN PROJECT-I(MANGONEL)(UTA016)",
+							"event": "SES#LE1",
+							"fullMarks": 50,
+							"obtainedMarks": 35.8,
+							"weightage": 50,
+							"effectiveMarks": 35.8,
+							"status": null
+						},
+						{
+							"srNo": "32",
+							"examCode": "2223EVESEM",
+							"subject": "OBJECT ORIENTED PROGRAMMING(UTA018)",
+							"event": "SES#LE2",
+							"fullMarks": 10,
+							"obtainedMarks": 9,
+							"weightage": 10,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "33",
+							"examCode": "2324ODDSEM",
+							"subject": "NUMERICAL ANALYSIS(UMA011)",
+							"event": "MST",
+							"fullMarks": 35,
+							"obtainedMarks": 22,
+							"weightage": 35,
+							"effectiveMarks": 22,
+							"status": null
+						},
+						{
+							"srNo": "34",
+							"examCode": "2324EVESEM",
+							"subject": "COMPUTER NETWORKS(UCS414)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 12.5,
+							"weightage": 30,
+							"effectiveMarks": 12.5,
+							"status": null
+						},
+						{
+							"srNo": "35",
+							"examCode": "2324EVESEM",
+							"subject": "COMPUTER NETWORKS(UCS414)",
+							"event": "SES#QZ1",
+							"fullMarks": 12,
+							"obtainedMarks": 10.6,
+							"weightage": 12,
+							"effectiveMarks": 10.6,
+							"status": null
+						},
+						{
+							"srNo": "36",
+							"examCode": "2425EVESEM",
+							"subject": "INNOVATION AND ENTREPRENEURSHIP(UTA025)",
+							"event": "SES#ASN1",
+							"fullMarks": 20,
+							"obtainedMarks": 17,
+							"weightage": 20,
+							"effectiveMarks": 17,
+							"status": null
+						},
+						{
+							"srNo": "37",
+							"examCode": "2425EVESEM",
+							"subject": "INNOVATION AND ENTREPRENEURSHIP(UTA025)",
+							"event": "SES#QZ1",
+							"fullMarks": 30,
+							"obtainedMarks": 28.7,
+							"weightage": 30,
+							"effectiveMarks": 28.7,
+							"status": null
+						},
+						{
+							"srNo": "38",
+							"examCode": "2324EVESEM",
+							"subject": "MEASUREMENT SCIENCE AND TECHNIQUES(UES035)",
+							"event": "ENDSEM",
+							"fullMarks": 100,
+							"obtainedMarks": 44,
+							"weightage": 40,
+							"effectiveMarks": 17.6,
+							"status": null
+						},
+						{
+							"srNo": "39",
+							"examCode": "2324EVESEM",
+							"subject": "MANUFACTURING PROCESSES(UTA026)",
+							"event": "ENDSEM",
+							"fullMarks": 80,
+							"obtainedMarks": 26.5,
+							"weightage": 40,
+							"effectiveMarks": 13.25,
+							"status": null
+						},
+						{
+							"srNo": "40",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-II(UCS674)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 27.5,
+							"weightage": 30,
+							"effectiveMarks": 27.5,
+							"status": null
+						},
+						{
+							"srNo": "41",
+							"examCode": "2223EVESEM",
+							"subject": "APPLIED PHYSICS(UPH004)",
+							"event": "MST",
+							"fullMarks": 25,
+							"obtainedMarks": 16,
+							"weightage": 25,
+							"effectiveMarks": 16,
+							"status": null
+						},
+						{
+							"srNo": "42",
+							"examCode": "2223ODDSEM",
+							"subject": "ELECTRICAL ENGINEERING(UEE001)",
+							"event": "SES#LE3",
+							"fullMarks": 20,
+							"obtainedMarks": 18,
+							"weightage": 20,
+							"effectiveMarks": 18,
+							"status": null
+						},
+						{
+							"srNo": "43",
+							"examCode": "2223EVESEM",
+							"subject": "ELECTRONIC ENGINEERING(UEC001)",
+							"event": "MST",
+							"fullMarks": 25,
+							"obtainedMarks": 19.5,
+							"weightage": 25,
+							"effectiveMarks": 19.5,
+							"status": null
+						},
+						{
+							"srNo": "44",
+							"examCode": "2223ODDSEM",
+							"subject": "MECHANICS(UES009)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 18,
+							"weightage": 30,
+							"effectiveMarks": 18,
+							"status": null
+						},
+						{
+							"srNo": "45",
+							"examCode": "2425EVESEM",
+							"subject": "MICROPROCESSOR-BASED SYSTEMS DESIGN(UCS617)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 3,
+							"weightage": 10,
+							"effectiveMarks": 3,
+							"status": null
+						},
+						{
+							"srNo": "46",
+							"examCode": "2324EVESEM",
+							"subject": "DATABASE MANAGEMENT SYSTEM(UCS310)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 14.5,
+							"weightage": 30,
+							"effectiveMarks": 14.5,
+							"status": null
+						},
+						{
+							"srNo": "47",
+							"examCode": "2324EVESEM",
+							"subject": "DESIGN AND ANALYSIS OF ALGORITHMS(UCS415)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 11,
+							"weightage": 15,
+							"effectiveMarks": 11,
+							"status": null
+						},
+						{
+							"srNo": "48",
+							"examCode": "2324EVESEM",
+							"subject": "ENGINEERING DESIGN PROJECT - II(UTA024)",
+							"event": "SES#LE1",
+							"fullMarks": 20,
+							"obtainedMarks": 18,
+							"weightage": 20,
+							"effectiveMarks": 18,
+							"status": null
+						},
+						{
+							"srNo": "49",
+							"examCode": "2425ODDSEM",
+							"subject": "COMPUTER ARCHITECTURE AND ORGANIZATION(UCS510)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 11.5,
+							"weightage": 30,
+							"effectiveMarks": 11.5,
+							"status": null
+						},
+						{
+							"srNo": "50",
+							"examCode": "2324EVESEM",
+							"subject": "MANUFACTURING PROCESSES(UTA026)",
+							"event": "MST",
+							"fullMarks": 45,
+							"obtainedMarks": 15,
+							"weightage": 30,
+							"effectiveMarks": 10,
+							"status": null
+						},
+						{
+							"srNo": "51",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-I(UCS673)",
+							"event": "SES#LE1",
+							"fullMarks": 10,
+							"obtainedMarks": 3.5,
+							"weightage": 10,
+							"effectiveMarks": 3.5,
+							"status": null
+						},
+						{
+							"srNo": "52",
+							"examCode": "2425ODDSEM",
+							"subject": "PROBABILITY AND STATISTICS(UMA401)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 9,
+							"weightage": 40,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "53",
+							"examCode": "2223ODDSEM",
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"event": "MST",
+							"fullMarks": 25,
+							"obtainedMarks": 21.5,
+							"weightage": 25,
+							"effectiveMarks": 21.5,
+							"status": null
+						},
+						{
+							"srNo": "54",
+							"examCode": "2223ODDSEM",
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"event": "SES#QZ1",
+							"fullMarks": 16,
+							"obtainedMarks": 9,
+							"weightage": 8,
+							"effectiveMarks": 4.5,
+							"status": null
+						},
+						{
+							"srNo": "55",
+							"examCode": "2324ODDSEM",
+							"subject": "OPERATING SYSTEMS(UCS303)",
+							"event": "ENDSEM",
+							"fullMarks": 100,
+							"obtainedMarks": 44.5,
+							"weightage": 35,
+							"effectiveMarks": 15.57,
+							"status": null
+						},
+						{
+							"srNo": "56",
+							"examCode": "2425ODDSEM",
+							"subject": "SOFTWARE ENGINEERING(UCS503)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 20.5,
+							"weightage": 30,
+							"effectiveMarks": 20.5,
+							"status": null
+						},
+						{
+							"srNo": "57",
+							"examCode": "2425ODDSEM",
+							"subject": "SOFTWARE ENGINEERING(UCS503)",
+							"event": "SES#LE1",
+							"fullMarks": 20,
+							"obtainedMarks": 18,
+							"weightage": 20,
+							"effectiveMarks": 18,
+							"status": null
+						},
+						{
+							"srNo": "58",
+							"examCode": "2425ODDSEM",
+							"subject": "SOFTWARE ENGINEERING(UCS503)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 4,
+							"weightage": 10,
+							"effectiveMarks": 4,
+							"status": null
+						},
+						{
+							"srNo": "59",
+							"examCode": "2425EVESEM",
+							"subject": "COMPUTER GRAPHICS(UCS505)",
+							"event": "SES#LE1",
+							"fullMarks": 15,
+							"obtainedMarks": 12,
+							"weightage": 15,
+							"effectiveMarks": 12,
+							"status": null
+						},
+						{
+							"srNo": "60",
+							"examCode": "2223ODDSEM",
+							"subject": "ENERGY AND ENVIRONMENT(UEN002)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 36.5,
+							"weightage": 50,
+							"effectiveMarks": 36.5,
+							"status": null
+						},
+						{
+							"srNo": "61",
+							"examCode": "2223EVESEM",
+							"subject": "MATHEMATICS - II(UMA004)",
+							"event": "SES#TUT2",
+							"fullMarks": 10,
+							"obtainedMarks": 9.5,
+							"weightage": 10,
+							"effectiveMarks": 9.5,
+							"status": null
+						},
+						{
+							"srNo": "62",
+							"examCode": "2324ODDSEM",
+							"subject": "DISCRETE MATHEMATICAL STRUCTURES(UCS405)",
+							"event": "MST",
+							"fullMarks": 35,
+							"obtainedMarks": 15,
+							"weightage": 35,
+							"effectiveMarks": 15,
+							"status": null
+						},
+						{
+							"srNo": "63",
+							"examCode": "2324EVESEM",
+							"subject": "ARTIFICIAL INTELLIGENCE(UCS411)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 8,
+							"weightage": 15,
+							"effectiveMarks": 8,
+							"status": null
+						},
+						{
+							"srNo": "64",
+							"examCode": "2425ODDSEM",
+							"subject": "MACHINE LEARNING(UML501)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 30,
+							"weightage": 40,
+							"effectiveMarks": 24,
+							"status": null
+						},
+						{
+							"srNo": "65",
+							"examCode": "2223ODDSEM",
+							"subject": "MATHEMATICS I(UMA010)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 35.5,
+							"weightage": 50,
+							"effectiveMarks": 35.5,
+							"status": null
+						},
+						{
+							"srNo": "66",
+							"examCode": "2425ODDSEM",
+							"subject": "COMPUTER ARCHITECTURE AND ORGANIZATION(UCS510)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 23.5,
+							"weightage": 40,
+							"effectiveMarks": 23.5,
+							"status": null
+						},
+						{
+							"srNo": "67",
+							"examCode": "2324EVESEM",
+							"subject": "MEASUREMENT SCIENCE AND TECHNIQUES(UES035)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 18.5,
+							"weightage": 30,
+							"effectiveMarks": 18.5,
+							"status": null
+						},
+						{
+							"srNo": "68",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-I(UCS673)",
+							"event": "SES#LE2",
+							"fullMarks": 10,
+							"obtainedMarks": 6.5,
+							"weightage": 10,
+							"effectiveMarks": 6.5,
+							"status": null
+						},
+						{
+							"srNo": "69",
+							"examCode": "2425ODDSEM",
+							"subject": "PROBABILITY AND STATISTICS(UMA401)",
+							"event": "SES#LE1",
+							"fullMarks": 30,
+							"obtainedMarks": 21.5,
+							"weightage": 30,
+							"effectiveMarks": 21.5,
+							"status": null
+						},
+						{
+							"srNo": "70",
+							"examCode": "2223ODDSEM",
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"event": "ENDSEM",
+							"fullMarks": 45,
+							"obtainedMarks": 43,
+							"weightage": 45,
+							"effectiveMarks": 43,
+							"status": null
+						},
+						{
+							"srNo": "71",
+							"examCode": "2425ODDSEM",
+							"subject": "SOFTWARE ENGINEERING(UCS503)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 21,
+							"weightage": 40,
+							"effectiveMarks": 21,
+							"status": null
+						},
+						{
+							"srNo": "72",
+							"examCode": "2425EVESEM",
+							"subject": "COMPUTER GRAPHICS(UCS505)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 11,
+							"weightage": 15,
+							"effectiveMarks": 11,
+							"status": null
+						},
+						{
+							"srNo": "73",
+							"examCode": "2223ODDSEM",
+							"subject": "APPLIED CHEMISTRY(UCB008)",
+							"event": "MST",
+							"fullMarks": 36,
+							"obtainedMarks": 23,
+							"weightage": 25,
+							"effectiveMarks": 15.97,
+							"status": null
+						},
+						{
+							"srNo": "74",
+							"examCode": "2223ODDSEM",
+							"subject": "APPLIED CHEMISTRY(UCB008)",
+							"event": "SES",
+							"fullMarks": 20,
+							"obtainedMarks": 11.5,
+							"weightage": 15,
+							"effectiveMarks": 8.62,
+							"status": null
+						},
+						{
+							"srNo": "75",
+							"examCode": "2223ODDSEM",
+							"subject": "APPLIED CHEMISTRY(UCB008)",
+							"event": "SES#LE2",
+							"fullMarks": 15,
+							"obtainedMarks": 12,
+							"weightage": 15,
+							"effectiveMarks": 12,
+							"status": null
+						},
+						{
+							"srNo": "76",
+							"examCode": "2223EVESEM",
+							"subject": "APPLIED PHYSICS(UPH004)",
+							"event": "SES#LE1",
+							"fullMarks": 20,
+							"obtainedMarks": 15,
+							"weightage": 20,
+							"effectiveMarks": 15,
+							"status": null
+						},
+						{
+							"srNo": "77",
+							"examCode": "2223EVESEM",
+							"subject": "APPLIED PHYSICS(UPH004)",
+							"event": "SES#TUT1",
+							"fullMarks": 5,
+							"obtainedMarks": 4.5,
+							"weightage": 5,
+							"effectiveMarks": 4.5,
+							"status": null
+						},
+						{
+							"srNo": "78",
+							"examCode": "2223ODDSEM",
+							"subject": "ELECTRICAL ENGINEERING(UEE001)",
+							"event": "ENDSEM",
+							"fullMarks": 50,
+							"obtainedMarks": 31,
+							"weightage": 35,
+							"effectiveMarks": 21.7,
+							"status": null
+						},
+						{
+							"srNo": "79",
+							"examCode": "2324ODDSEM",
+							"subject": "DISCRETE MATHEMATICAL STRUCTURES(UCS405)",
+							"event": "ENDSEM",
+							"fullMarks": 35,
+							"obtainedMarks": 6,
+							"weightage": 35,
+							"effectiveMarks": 6,
+							"status": null
+						},
+						{
+							"srNo": "80",
+							"examCode": "2324ODDSEM",
+							"subject": "DISCRETE MATHEMATICAL STRUCTURES(UCS405)",
+							"event": "SES#ASN1",
+							"fullMarks": 15,
+							"obtainedMarks": 14,
+							"weightage": 15,
+							"effectiveMarks": 14,
+							"status": null
+						},
+						{
+							"srNo": "81",
+							"examCode": "2425EVESEM",
+							"subject": "MICROPROCESSOR-BASED SYSTEMS DESIGN(UCS617)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 21.5,
+							"weightage": 40,
+							"effectiveMarks": 21.5,
+							"status": null
+						},
+						{
+							"srNo": "82",
+							"examCode": "2324EVESEM",
+							"subject": "DATABASE MANAGEMENT SYSTEM(UCS310)",
+							"event": "SES#LE1",
+							"fullMarks": 20,
+							"obtainedMarks": 19,
+							"weightage": 20,
+							"effectiveMarks": 19,
+							"status": null
+						},
+						{
+							"srNo": "83",
+							"examCode": "2324EVESEM",
+							"subject": "DATABASE MANAGEMENT SYSTEM(UCS310)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 5,
+							"weightage": 10,
+							"effectiveMarks": 5,
+							"status": null
+						},
+						{
+							"srNo": "84",
+							"examCode": "2223ODDSEM",
+							"subject": "MATHEMATICS I(UMA010)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 26.5,
+							"weightage": 30,
+							"effectiveMarks": 26.5,
+							"status": null
+						},
+						{
+							"srNo": "85",
+							"examCode": "2223ODDSEM",
+							"subject": "MATHEMATICS I(UMA010)",
+							"event": "SES#TUT1",
+							"fullMarks": 10,
+							"obtainedMarks": 4,
+							"weightage": 10,
+							"effectiveMarks": 4,
+							"status": null
+						},
+						{
+							"srNo": "86",
+							"examCode": "2425ODDSEM",
+							"subject": "INTRODUCTORY COURSE IN FRENCH(UHU016)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": null,
+							"weightage": 40,
+							"effectiveMarks": null,
+							"status": "Absent"
+						},
+						{
+							"srNo": "87",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK PROGRAMMING(UCS413)",
+							"event": "SES#QZ1",
+							"fullMarks": 12,
+							"obtainedMarks": 8,
+							"weightage": 12,
+							"effectiveMarks": 8,
+							"status": null
+						},
+						{
+							"srNo": "88",
+							"examCode": "2324EVESEM",
+							"subject": "DESIGN AND ANALYSIS OF ALGORITHMS(UCS415)",
+							"event": "SES#LE1",
+							"fullMarks": 15,
+							"obtainedMarks": 11,
+							"weightage": 15,
+							"effectiveMarks": 11,
+							"status": null
+						},
+						{
+							"srNo": "89",
+							"examCode": "2324EVESEM",
+							"subject": "ENGINEERING DESIGN PROJECT - II(UTA024)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 7.5,
+							"weightage": 10,
+							"effectiveMarks": 7.5,
+							"status": null
+						},
+						{
+							"srNo": "90",
+							"examCode": "2425EVESEM",
+							"subject": "INNOVATION AND ENTREPRENEURSHIP(UTA025)",
+							"event": "SES#OTH",
+							"fullMarks": 15,
+							"obtainedMarks": 10.5,
+							"weightage": 15,
+							"effectiveMarks": 10.5,
+							"status": null
+						},
+						{
+							"srNo": "91",
+							"examCode": "2324EVESEM",
+							"subject": "MEASUREMENT SCIENCE AND TECHNIQUES(UES035)",
+							"event": "SES",
+							"fullMarks": 30,
+							"obtainedMarks": 24.5,
+							"weightage": 30,
+							"effectiveMarks": 24.5,
+							"status": null
+						},
+						{
+							"srNo": "92",
+							"examCode": "2324EVESEM",
+							"subject": "MANUFACTURING PROCESSES(UTA026)",
+							"event": "SES",
+							"fullMarks": 30,
+							"obtainedMarks": 21.93,
+							"weightage": 30,
+							"effectiveMarks": 21.93,
+							"status": null
+						},
+						{
+							"srNo": "93",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK DEFENCE (Cyber Forensics and Ethical Hacking )(UCS550)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 38.5,
+							"weightage": 40,
+							"effectiveMarks": 38.5,
+							"status": null
+						},
+						{
+							"srNo": "94",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK DEFENCE (Cyber Forensics and Ethical Hacking )(UCS550)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 23,
+							"weightage": 30,
+							"effectiveMarks": 23,
+							"status": null
+						},
+						{
+							"srNo": "95",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK DEFENCE (Cyber Forensics and Ethical Hacking )(UCS550)",
+							"event": "SES",
+							"fullMarks": 15,
+							"obtainedMarks": 13,
+							"weightage": 15,
+							"effectiveMarks": 13,
+							"status": null
+						},
+						{
+							"srNo": "96",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-II(UCS674)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 32.5,
+							"weightage": 40,
+							"effectiveMarks": 32.5,
+							"status": null
+						},
+						{
+							"srNo": "97",
+							"examCode": "2223ODDSEM",
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"event": "SES#LE1",
+							"fullMarks": 10,
+							"obtainedMarks": 9,
+							"weightage": 10,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "98",
+							"examCode": "2324ODDSEM",
+							"subject": "DATA STRUCTURES(UCS301)",
+							"event": "ENDSEM",
+							"fullMarks": 60,
+							"obtainedMarks": 38.5,
+							"weightage": 35,
+							"effectiveMarks": 22.45,
+							"status": null
+						},
+						{
+							"srNo": "99",
+							"examCode": "2425EVESEM",
+							"subject": "COMPUTER GRAPHICS(UCS505)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 15.5,
+							"weightage": 30,
+							"effectiveMarks": 15.5,
+							"status": null
+						},
+						{
+							"srNo": "100",
+							"examCode": "2324EVESEM",
+							"subject": "ARTIFICIAL INTELLIGENCE(UCS411)",
+							"event": "ENDSEM",
+							"fullMarks": 80,
+							"obtainedMarks": 36,
+							"weightage": 40,
+							"effectiveMarks": 18,
+							"status": null
+						},
+						{
+							"srNo": "101",
+							"examCode": "2324EVESEM",
+							"subject": "ARTIFICIAL INTELLIGENCE(UCS411)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 14.5,
+							"weightage": 30,
+							"effectiveMarks": 14.5,
+							"status": null
+						},
+						{
+							"srNo": "102",
+							"examCode": "2425EVESEM",
+							"subject": "MICROPROCESSOR-BASED SYSTEMS DESIGN(UCS617)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 11,
+							"weightage": 30,
+							"effectiveMarks": 11,
+							"status": null
+						},
+						{
+							"srNo": "103",
+							"examCode": "2425EVESEM",
+							"subject": "OPTIMIZATION TECHNIQUES(UMA035)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 17,
+							"weightage": 30,
+							"effectiveMarks": 17,
+							"status": null
+						},
+						{
+							"srNo": "104",
+							"examCode": "2223EVESEM",
+							"subject": "ENGINEERING DRAWING(UTA015)",
+							"event": "ENDSEM",
+							"fullMarks": 45,
+							"obtainedMarks": 40,
+							"weightage": 45,
+							"effectiveMarks": 40,
+							"status": null
+						},
+						{
+							"srNo": "105",
+							"examCode": "2425ODDSEM",
+							"subject": "INTRODUCTORY COURSE IN FRENCH(UHU016)",
+							"event": "SES",
+							"fullMarks": 30,
+							"obtainedMarks": 28.25,
+							"weightage": 30,
+							"effectiveMarks": 28.25,
+							"status": null
+						},
+						{
+							"srNo": "106",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK PROGRAMMING(UCS413)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 14.5,
+							"weightage": 30,
+							"effectiveMarks": 14.5,
+							"status": null
+						},
+						{
+							"srNo": "107",
+							"examCode": "2324EVESEM",
+							"subject": "COMPUTER NETWORKS(UCS414)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 24.5,
+							"weightage": 40,
+							"effectiveMarks": 24.5,
+							"status": null
+						},
+						{
+							"srNo": "108",
+							"examCode": "2324EVESEM",
+							"subject": "COMPUTER NETWORKS(UCS414)",
+							"event": "SES#LE1",
+							"fullMarks": 18,
+							"obtainedMarks": 13.56,
+							"weightage": 18,
+							"effectiveMarks": 13.56,
+							"status": null
+						},
+						{
+							"srNo": "109",
+							"examCode": "2324EVESEM",
+							"subject": "DESIGN AND ANALYSIS OF ALGORITHMS(UCS415)",
+							"event": "ENDSEM",
+							"fullMarks": 60,
+							"obtainedMarks": 21,
+							"weightage": 40,
+							"effectiveMarks": 14,
+							"status": null
+						},
+						{
+							"srNo": "110",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-I(UCS673)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 6,
+							"weightage": 10,
+							"effectiveMarks": 6,
+							"status": null
+						},
+						{
+							"srNo": "111",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-II(UCS674)",
+							"event": "SES#QZ2",
+							"fullMarks": 15,
+							"obtainedMarks": 11,
+							"weightage": 15,
+							"effectiveMarks": 11,
+							"status": null
+						},
+						{
+							"srNo": "112",
+							"examCode": "2425ODDSEM",
+							"subject": "PROBABILITY AND STATISTICS(UMA401)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 17.5,
+							"weightage": 30,
+							"effectiveMarks": 17.5,
+							"status": null
+						},
+						{
+							"srNo": "113",
+							"examCode": "2223ODDSEM",
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"event": "SES#ASN1",
+							"fullMarks": 2,
+							"obtainedMarks": 0,
+							"weightage": 2,
+							"effectiveMarks": 0,
+							"status": null
+						},
+						{
+							"srNo": "114",
+							"examCode": "2324ODDSEM",
+							"subject": "DATA STRUCTURES(UCS301)",
+							"event": "MST",
+							"fullMarks": 45,
+							"obtainedMarks": 23.5,
+							"weightage": 35,
+							"effectiveMarks": 18.27,
+							"status": null
+						},
+						{
+							"srNo": "115",
+							"examCode": "2223ODDSEM",
+							"subject": "APPLIED CHEMISTRY(UCB008)",
+							"event": "SES#LE1",
+							"fullMarks": 5,
+							"obtainedMarks": 4,
+							"weightage": 5,
+							"effectiveMarks": 4,
+							"status": null
+						},
+						{
+							"srNo": "116",
+							"examCode": "2223ODDSEM",
+							"subject": "ELECTRICAL ENGINEERING(UEE001)",
+							"event": "MST",
+							"fullMarks": 50,
+							"obtainedMarks": 35.5,
+							"weightage": 25,
+							"effectiveMarks": 17.75,
+							"status": null
+						},
+						{
+							"srNo": "117",
+							"examCode": "2223EVESEM",
+							"subject": "ELECTRONIC ENGINEERING(UEC001)",
+							"event": "ENDSEM",
+							"fullMarks": 35,
+							"obtainedMarks": 15,
+							"weightage": 35,
+							"effectiveMarks": 15,
+							"status": null
+						},
+						{
+							"srNo": "118",
+							"examCode": "2223ODDSEM",
+							"subject": "MECHANICS(UES009)",
+							"event": "ENDSEM",
+							"fullMarks": 45,
+							"obtainedMarks": 22,
+							"weightage": 45,
+							"effectiveMarks": 22,
+							"status": null
+						},
+						{
+							"srNo": "119",
+							"examCode": "2223ODDSEM",
+							"subject": "MECHANICS(UES009)",
+							"event": "SES",
+							"fullMarks": 25,
+							"obtainedMarks": 22.3,
+							"weightage": 25,
+							"effectiveMarks": 22.3,
+							"status": null
+						},
+						{
+							"srNo": "120",
+							"examCode": "2223ODDSEM",
+							"subject": "ENERGY AND ENVIRONMENT(UEN002)",
+							"event": "SES#QZ2",
+							"fullMarks": 10,
+							"obtainedMarks": 6,
+							"weightage": 10,
+							"effectiveMarks": 6,
+							"status": null
+						},
+						{
+							"srNo": "121",
+							"examCode": "2324ODDSEM",
+							"subject": "ENGINEERING MATERIALS(UES012)",
+							"event": "SES#LE1",
+							"fullMarks": 25,
+							"obtainedMarks": 19,
+							"weightage": 25,
+							"effectiveMarks": 19,
+							"status": null
+						},
+						{
+							"srNo": "122",
+							"examCode": "2425EVESEM",
+							"subject": "MICROPROCESSOR-BASED SYSTEMS DESIGN(UCS617)",
+							"event": "SES#LE2",
+							"fullMarks": 15,
+							"obtainedMarks": 14,
+							"weightage": 15,
+							"effectiveMarks": 14,
+							"status": null
+						},
+						{
+							"srNo": "123",
+							"examCode": "2223EVESEM",
+							"subject": "ENGINEERING DRAWING(UTA015)",
+							"event": "SES",
+							"fullMarks": 35,
+							"obtainedMarks": 30,
+							"weightage": 35,
+							"effectiveMarks": 30,
+							"status": null
+						},
+						{
+							"srNo": "124",
+							"examCode": "2223EVESEM",
+							"subject": "OBJECT ORIENTED PROGRAMMING(UTA018)",
+							"event": "SES#LE1",
+							"fullMarks": 10,
+							"obtainedMarks": 9,
+							"weightage": 10,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "125",
+							"examCode": "2223EVESEM",
+							"subject": "OBJECT ORIENTED PROGRAMMING(UTA018)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 7.5,
+							"weightage": 15,
+							"effectiveMarks": 7.5,
+							"status": null
+						},
+						{
+							"srNo": "126",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK PROGRAMMING(UCS413)",
+							"event": "ENDSEM",
+							"fullMarks": 40,
+							"obtainedMarks": 24.5,
+							"weightage": 40,
+							"effectiveMarks": 24.5,
+							"status": null
+						},
+						{
+							"srNo": "127",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK PROGRAMMING(UCS413)",
+							"event": "SES#LE1",
+							"fullMarks": 18,
+							"obtainedMarks": 17,
+							"weightage": 18,
+							"effectiveMarks": 17,
+							"status": null
+						},
+						{
+							"srNo": "128",
+							"examCode": "2324ODDSEM",
+							"subject": "NUMERICAL ANALYSIS(UMA011)",
+							"event": "SES#OTH",
+							"fullMarks": 30,
+							"obtainedMarks": 19.5,
+							"weightage": 30,
+							"effectiveMarks": 19.5,
+							"status": null
+						},
+						{
+							"srNo": "129",
+							"examCode": "2324EVESEM",
+							"subject": "ENGINEERING DESIGN PROJECT - II(UTA024)",
+							"event": "SES#LE2",
+							"fullMarks": 20,
+							"obtainedMarks": 15,
+							"weightage": 20,
+							"effectiveMarks": 15,
+							"status": null
+						},
+						{
+							"srNo": "130",
+							"examCode": "2425ODDSEM",
+							"subject": "NETWORK DEFENCE (Cyber Forensics and Ethical Hacking )(UCS550)",
+							"event": "SES#QZ2",
+							"fullMarks": 15,
+							"obtainedMarks": 14,
+							"weightage": 15,
+							"effectiveMarks": 14,
+							"status": null
+						},
+						{
+							"srNo": "131",
+							"examCode": "2324ODDSEM",
+							"subject": "DATA STRUCTURES(UCS301)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 9,
+							"weightage": 15,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "132",
+							"examCode": "2324ODDSEM",
+							"subject": "OPERATING SYSTEMS(UCS303)",
+							"event": "MST",
+							"fullMarks": 35,
+							"obtainedMarks": 19.5,
+							"weightage": 35,
+							"effectiveMarks": 19.5,
+							"status": null
+						},
+						{
+							"srNo": "133",
+							"examCode": "2324ODDSEM",
+							"subject": "OPERATING SYSTEMS(UCS303)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 5,
+							"weightage": 10,
+							"effectiveMarks": 5,
+							"status": null
+						},
+						{
+							"srNo": "134",
+							"examCode": "2425EVESEM",
+							"subject": "THEORY OF COMPUTATION(UCS701)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 9.5,
+							"weightage": 30,
+							"effectiveMarks": 9.5,
+							"status": null
+						},
+						{
+							"srNo": "135",
+							"examCode": "2425EVESEM",
+							"subject": "THEORY OF COMPUTATION(UCS701)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 5,
+							"weightage": 15,
+							"effectiveMarks": 5,
+							"status": null
+						},
+						{
+							"srNo": "136",
+							"examCode": "2223ODDSEM",
+							"subject": "ELECTRICAL ENGINEERING(UEE001)",
+							"event": "SES",
+							"fullMarks": 20,
+							"obtainedMarks": 17,
+							"weightage": 20,
+							"effectiveMarks": 17,
+							"status": null
+						},
+						{
+							"srNo": "137",
+							"examCode": "2223EVESEM",
+							"subject": "PROFESSIONAL COMMUNICATION(UHU003)",
+							"event": "MST",
+							"fullMarks": 25,
+							"obtainedMarks": 14,
+							"weightage": 25,
+							"effectiveMarks": 14,
+							"status": null
+						},
+						{
+							"srNo": "138",
+							"examCode": "2223ODDSEM",
+							"subject": "ENERGY AND ENVIRONMENT(UEN002)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 15,
+							"weightage": 30,
+							"effectiveMarks": 15,
+							"status": null
+						},
+						{
+							"srNo": "139",
+							"examCode": "2223ODDSEM",
+							"subject": "ENERGY AND ENVIRONMENT(UEN002)",
+							"event": "SES#QZ1",
+							"fullMarks": 10,
+							"obtainedMarks": 9,
+							"weightage": 10,
+							"effectiveMarks": 9,
+							"status": null
+						},
+						{
+							"srNo": "140",
+							"examCode": "2324ODDSEM",
+							"subject": "DISCRETE MATHEMATICAL STRUCTURES(UCS405)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 8.5,
+							"weightage": 15,
+							"effectiveMarks": 8.5,
+							"status": null
+						},
+						{
+							"srNo": "141",
+							"examCode": "2425ODDSEM",
+							"subject": "MACHINE LEARNING(UML501)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 12.5,
+							"weightage": 30,
+							"effectiveMarks": 12.5,
+							"status": null
+						},
+						{
+							"srNo": "142",
+							"examCode": "2425ODDSEM",
+							"subject": "MACHINE LEARNING(UML501)",
+							"event": "SES#LE1",
+							"fullMarks": 15,
+							"obtainedMarks": 12.5,
+							"weightage": 15,
+							"effectiveMarks": 12.5,
+							"status": null
+						},
+						{
+							"srNo": "143",
+							"examCode": "2425ODDSEM",
+							"subject": "MACHINE LEARNING(UML501)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 7,
+							"weightage": 15,
+							"effectiveMarks": 7,
+							"status": null
+						},
+						{
+							"srNo": "144",
+							"examCode": "2223EVESEM",
+							"subject": "ENGINEERING DRAWING(UTA015)",
+							"event": "MST",
+							"fullMarks": 50,
+							"obtainedMarks": 40,
+							"weightage": 20,
+							"effectiveMarks": 16,
+							"status": null
+						},
+						{
+							"srNo": "145",
+							"examCode": "2223EVESEM",
+							"subject": "OBJECT ORIENTED PROGRAMMING(UTA018)",
+							"event": "MST",
+							"fullMarks": 25,
+							"obtainedMarks": 19.5,
+							"weightage": 25,
+							"effectiveMarks": 19.5,
+							"status": null
+						},
+						{
+							"srNo": "146",
+							"examCode": "2425ODDSEM",
+							"subject": "INTRODUCTORY COURSE IN FRENCH(UHU016)",
+							"event": "MST",
+							"fullMarks": 30,
+							"obtainedMarks": 17.5,
+							"weightage": 30,
+							"effectiveMarks": 17.5,
+							"status": null
+						},
+						{
+							"srNo": "147",
+							"examCode": "2324EVESEM",
+							"subject": "DESIGN AND ANALYSIS OF ALGORITHMS(UCS415)",
+							"event": "MST",
+							"fullMarks": 45,
+							"obtainedMarks": 18.5,
+							"weightage": 30,
+							"effectiveMarks": 12.33,
+							"status": null
+						},
+						{
+							"srNo": "148",
+							"examCode": "2425ODDSEM",
+							"subject": "COMPUTER ARCHITECTURE AND ORGANIZATION(UCS510)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 7,
+							"weightage": 15,
+							"effectiveMarks": 7,
+							"status": null
+						},
+						{
+							"srNo": "149",
+							"examCode": "2425EVESEM",
+							"subject": "ETHICAL HACKING-II(UCS674)",
+							"event": "SES#QZ1",
+							"fullMarks": 15,
+							"obtainedMarks": 10,
+							"weightage": 15,
+							"effectiveMarks": 10,
+							"status": null
+						}
+					],
+					"error": null
+				}
+			},
+			"https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventGradesView.jsp": {
+				"fetch": {
+					"status": 200,
+					"statusText": "OK",
+					"success": true,
+					"errorMessage": null,
+					"errorType": null,
+					"validationFailed": false
+				},
+				"parsed": {
+					"parsed": true,
+					"data": [
+						{
+							"subject": "APPLIED PHYSICS(UPH004)",
+							"examCode": "2223EVESEM",
+							"marksObtained": 57.1,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "ELECTRONIC ENGINEERING(UEC001)",
+							"examCode": "2223EVESEM",
+							"marksObtained": 67,
+							"maxMarks": 100,
+							"grade": "A-"
+						},
+						{
+							"subject": "ENGINEERING DRAWING(UTA015)",
+							"examCode": "2223EVESEM",
+							"marksObtained": 86,
+							"maxMarks": 100,
+							"grade": "A"
+						},
+						{
+							"subject": "MATHEMATICS - II(UMA004)",
+							"examCode": "2223EVESEM",
+							"marksObtained": 75.5,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "OBJECT ORIENTED PROGRAMMING(UTA018)",
+							"examCode": "2223EVESEM",
+							"marksObtained": 76.6,
+							"maxMarks": 100,
+							"grade": "A"
+						},
+						{
+							"subject": "PROFESSIONAL COMMUNICATION(UHU003)",
+							"examCode": "2223EVESEM",
+							"marksObtained": 67.56,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "APPLIED CHEMISTRY(UCB008)",
+							"examCode": "2223ODDSEM",
+							"marksObtained": 57.26,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "COMPUTER PROGRAMMING(UTA003)",
+							"examCode": "2223ODDSEM",
+							"marksObtained": 87,
+							"maxMarks": 100,
+							"grade": "A"
+						},
+						{
+							"subject": "ELECTRICAL ENGINEERING(UEE001)",
+							"examCode": "2223ODDSEM",
+							"marksObtained": 74.45,
+							"maxMarks": 100,
+							"grade": "A"
+						},
+						{
+							"subject": "ENERGY AND ENVIRONMENT(UEN002)",
+							"examCode": "2223ODDSEM",
+							"marksObtained": 66.5,
+							"maxMarks": 100,
+							"grade": "A-"
+						},
+						{
+							"subject": "MATHEMATICS I(UMA010)",
+							"examCode": "2223ODDSEM",
+							"marksObtained": 71.5,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "MECHANICS(UES009)",
+							"examCode": "2223ODDSEM",
+							"marksObtained": 62.3,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "ARTIFICIAL INTELLIGENCE(UCS411)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 53,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "COMPUTER NETWORKS(UCS414)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 61.16,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "DATABASE MANAGEMENT SYSTEM(UCS310)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 56,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "DESIGN AND ANALYSIS OF ALGORITHMS(UCS415)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 48.33,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "ENGINEERING DESIGN PROJECT - II(UTA024)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 79,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "MANUFACTURING PROCESSES(UTA026)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 45.18,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "MEASUREMENT SCIENCE AND TECHNIQUES(UES035)",
+							"examCode": "2324EVESEM",
+							"marksObtained": 60.6,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "DATA STRUCTURES(UCS301)",
+							"examCode": "2324ODDSEM",
+							"marksObtained": 62.74,
+							"maxMarks": 100,
+							"grade": "A-"
+						},
+						{
+							"subject": "DISCRETE MATHEMATICAL STRUCTURES(UCS405)",
+							"examCode": "2324ODDSEM",
+							"marksObtained": 43.5,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "ENGINEERING DESIGN PROJECT-I(MANGONEL)(UTA016)",
+							"examCode": "2324ODDSEM",
+							"marksObtained": 77.3,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "ENGINEERING MATERIALS(UES012)",
+							"examCode": "2324ODDSEM",
+							"marksObtained": 58.81,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "NUMERICAL ANALYSIS(UMA011)",
+							"examCode": "2324ODDSEM",
+							"marksObtained": 53.5,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "OPERATING SYSTEMS(UCS303)",
+							"examCode": "2324ODDSEM",
+							"marksObtained": 57.08,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "COMPUTER ARCHITECTURE AND ORGANIZATION(UCS510)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 52,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "INTRODUCTORY COURSE IN FRENCH(UHU016)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 45.75,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "MACHINE LEARNING(UML501)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 56,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "NETWORK DEFENCE (Cyber Forensics and Ethical Hacking )(UCS550)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 88.5,
+							"maxMarks": 100,
+							"grade": "A"
+						},
+						{
+							"subject": "NETWORK PROGRAMMING(UCS413)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 64,
+							"maxMarks": 100,
+							"grade": "B"
+						},
+						{
+							"subject": "PROBABILITY AND STATISTICS(UMA401)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 48,
+							"maxMarks": 100,
+							"grade": "B-"
+						},
+						{
+							"subject": "SOFTWARE ENGINEERING(UCS503)",
+							"examCode": "2425ODDSEM",
+							"marksObtained": 63.5,
+							"maxMarks": 100,
+							"grade": "B"
+						}
+					],
+					"error": null
+				}
+			},
+			"https://webkiosk.thapar.edu/StudentFiles/Exam/StudCGPAReport.jsp": {
+				"fetch": {
+					"status": 200,
+					"statusText": "OK",
+					"success": true,
+					"errorMessage": null,
+					"errorType": null,
+					"validationFailed": false
+				},
+				"parsed": {
+					"parsed": true,
+					"data": [
+						{
+							"examCode": "2223ODDSEM",
+							"courseCredit": 22,
+							"earnedCredit": 22,
+							"pointsSecured": 193.5,
+							"sgpa": 8.79,
+							"cgpa": 8.79
+						},
+						{
+							"examCode": "2223EVESEM",
+							"courseCredit": 23.5,
+							"earnedCredit": 23.5,
+							"pointsSecured": 208.5,
+							"sgpa": 8.87,
+							"cgpa": 8.83
+						},
+						{
+							"examCode": "2324ODDSEM",
+							"courseCredit": 23,
+							"earnedCredit": 23,
+							"pointsSecured": 176,
+							"sgpa": 7.65,
+							"cgpa": 8.43
+						},
+						{
+							"examCode": "2324EVESEM",
+							"courseCredit": 25,
+							"earnedCredit": 25,
+							"pointsSecured": 186,
+							"sgpa": 7.44,
+							"cgpa": 8.17
+						},
+						{
+							"examCode": "2425ODDSEM",
+							"courseCredit": 23,
+							"earnedCredit": 23,
+							"pointsSecured": 180,
+							"sgpa": 7.82,
+							"cgpa": 8.1
+						}
+					],
+					"error": null
+				}
+			}
+		},
+		"summary": {
+			"total": 4,
+			"successful": 4,
+			"failed": 0,
+			"errors": []
+		}
+	},
+	"timestamp": "2025-06-16T03:29:18.517Z"
+}

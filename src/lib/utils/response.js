@@ -102,6 +102,7 @@ export async function validateSessionId(request) {
       sessionId: loginData.sessionId,
       responseHeaders: headers,
       refreshed: true,
+      enrollmentNo: enrollmentNo
     };
   }
 
@@ -109,5 +110,7 @@ export async function validateSessionId(request) {
     sessionId,
     responseHeaders: null,
     refreshed: false,
+    enrollmentNo: enrollmentNo
+
   };
 }
