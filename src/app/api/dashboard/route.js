@@ -22,7 +22,10 @@ export async function GET(request) {
   const results = result ? result.data : {};
   const errors = [];
   
-
+  // if (result===null) {
+  //   const postResponse = await POST(request);
+  //   return postResponse;
+  // }
   
   const responseMessage = 'All dashboard data fetched and parsed successfully';
 

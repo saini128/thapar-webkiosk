@@ -79,27 +79,24 @@ export async function validateSessionId(request) {
       body: JSON.stringify({ memberCode: enrollmentNo, password: creds.password, _internal: true }),
     });
 
-    const loginData = await loginRes.json();
-    if (!loginData.success || !loginData.sessionId) {
-      console.error('WebKiosk re-login failed');
+    const setCookieHeader = loginRes.headers.get('set-cookie');
+    if (!setCookieHeader) {
+      console.error('No Set-Cookie header returned from /api/login');
       return null;
     }
 
-    // Return new session ID and headers to set cookies
+    const sessionId = extractCookieValue(setCookieHeader, 'X-Session-ID');
+    if (!sessionId) {
+      console.error('X-Session-ID not found in Set-Cookie');
+      return null;
+    }
+
+    // Return session ID and refreshed Set-Cookie headers
     const headers = new Headers();
-    headers.append(
-      'Set-Cookie',
-      `X-Session-ID=${loginData.sessionId}; Path=/; Max-Age=1800; HttpOnly; ${process.env.NODE_ENV === 'production' ? 'Secure;' : ''
-      }`
-    );
-    headers.append(
-      'Set-Cookie',
-      `X-Session-Issued-At=${Date.now()}; Path=/; Max-Age=1800; HttpOnly; ${process.env.NODE_ENV === 'production' ? 'Secure;' : ''
-      }`
-    );
+    headers.append('Set-Cookie', setCookieHeader);
 
     return {
-      sessionId: loginData.sessionId,
+      sessionId: sessionId,
       responseHeaders: headers,
       refreshed: true,
       enrollmentNo: enrollmentNo
@@ -113,4 +110,14 @@ export async function validateSessionId(request) {
     enrollmentNo: enrollmentNo
 
   };
+}
+function extractCookieValue(setCookieHeader, name) {
+  const cookie = setCookieHeader
+    .split(',')
+    .find((c) => c.includes(`${name}=`));
+
+  if (!cookie) return null;
+
+  const match = cookie.match(new RegExp(`${name}=([^;]+)`));
+  return match?.[1] || null;
 }
