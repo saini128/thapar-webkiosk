@@ -17,12 +17,12 @@ export default function Dashboard() {
       router.push('/login');
     } else {
       const json = await res.json();
-      console.log('Dashboard data:', json);
       setDashboardData(json.data);
     }
   };
 
   const handleLogout = async () => {
+    localStorage.removeItem('dashboardData');
     await fetch('/api/signout');
     router.push('/login');
   };
