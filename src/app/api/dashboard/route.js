@@ -18,15 +18,15 @@ export async function GET(request) {
   const { sessionId, refreshed, responseHeaders, enrollmentNo } = session;
   // Get all URLs to fetch
   const urlsToFetch = Object.values(WEBKIOSK_URLS);
-  var result = await getDashboard(enrollmentNo);
-  const results = result ? result.data : {};
+  var results = await getDashboard(enrollmentNo);
+  if (!results ||results.data===null) {
+    const postResponse = await POST(request);
+    return postResponse;
+  } else {
+      results=results.data;
+  }
   const errors = [];
-  
-  // if (result===null) {
-  //   const postResponse = await POST(request);
-  //   return postResponse;
-  // }
-  
+    
   const responseMessage = 'All dashboard data fetched and parsed successfully';
 
   const response = NextResponse.json(
