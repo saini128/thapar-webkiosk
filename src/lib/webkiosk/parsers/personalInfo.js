@@ -1,11 +1,9 @@
 import { load } from 'cheerio';
 
-/**
- * Parse personal information from WebKiosk HTML
- * @param {string} htmlContent - Raw HTML content from StudPersonalInfo.jsp
- * @returns {Object} Parsed personal information data
- */
 export function parsePersonalInfo(htmlContent) {
+  htmlContent = htmlContent
+    .replace(/[\n\r]/g, '')         // Remove all newline and carriage return characters
+    .replace(/\s{2,}/g, ' ');
   const $ = load(htmlContent);
 
   const result = {
@@ -55,9 +53,9 @@ export function parsePersonalInfo(htmlContent) {
       enrollmentNo: infoMap['enrollment no.'],
       fatherName: infoMap["father's name"],
       motherName: infoMap["mother's name"],
-      dob: infoMap['date of birth'],
+      dob: infoMap['date of birth no.'],
       course: (infoMap['course'] || '').replace(/\(.*?\)/, '').trim() + (infoMap['course']?.match(/\((.*?)\)/) || [])[1] || '',
-      
+
       semester: infoMap['semester'],
 
       contact: {

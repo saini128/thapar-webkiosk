@@ -17,6 +17,7 @@ export default function Dashboard() {
       router.push('/login');
     } else {
       const json = await res.json();
+      console.log('Dashboard data:', json);
       setDashboardData(json.data);
     }
   };
