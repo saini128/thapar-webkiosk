@@ -23,6 +23,7 @@ export function DashboardProvider({ children }) {
       }
 
       const json = await res.json();
+      console.log('Server Fetched Data', json)
       const encrypted = encrypt(json);
       localStorage.setItem('dashboardData', encrypted);
 
@@ -68,7 +69,6 @@ function parseDashboardData(raw) {
 
   // Personal Info
   const personalRaw = results?.['https://webkiosk.thapar.edu/StudentFiles/PersonalFiles/StudPersonalInfo.jsp']?.parsed?.data || {};
-  // personalRaw.enrollmentNo = raw.enrollmentNo;
   const studentProfile = new StudentProfile(personalRaw);
 
   // Marks
@@ -84,15 +84,9 @@ function parseDashboardData(raw) {
   const cgpaReports = cgpaRaw.map(item => new CGPAReport(item));
 
   const timestamp = raw.timestamp || null;
-
-  console.log('Parsed dashboard data:', {
-    studentProfile,
-    marks,
-    subjectGrades,
-    cgpaReports,
-    timestamp,
-  });
+  const enrollmentNo = raw.data.enrollmentNo || null
   return {
+    enrollmentNo,
     studentProfile,
     marks,
     subjectGrades,

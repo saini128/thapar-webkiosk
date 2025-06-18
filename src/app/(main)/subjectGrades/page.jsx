@@ -119,6 +119,7 @@ const InfoCard = ({ icon, title, value }) => {
 };
 
 const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState('overview');
 const { data } = useDashboard();
 
   if (!data) return null;
@@ -130,6 +131,7 @@ const { data } = useDashboard();
     cgpaReports,
     timestamp,
   } = data;
+  console.log(data);
   // Calculate current semester from latest examCode
   const getCurrentSemester = () => {
     if (!cgpaReports.length) return "N/A";
@@ -195,6 +197,7 @@ const { data } = useDashboard();
   const totalSubjects = new Set(subjectGrades.map(grade => grade.subject)).size;
 
   const renderOverview = () => (
+    
     <VStack spacing={6} align="stretch">
       {/* Stats Grid */}
       <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} gap={6}>
@@ -297,7 +300,7 @@ const { data } = useDashboard();
             <VStack spacing={4} align="stretch">
               <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={4}>
                 <InfoCard icon={FiUser} title="Name" value={studentProfile.name} />
-                <InfoCard icon={FiAward} title="Enrollment No." value={enrollmentNo} />
+                <InfoCard icon={FiAward} title="Enrollment No." value={studentProfile.enrollmentNo} />
                 <InfoCard icon={FiBook} title="Course" value={studentProfile.course} />
                 <InfoCard icon={FiCalendar} title="Current Semester" value={getCurrentSemester()} />
                 <InfoCard icon={FiMail} title="Email" value={studentProfile.studentEmail[0]} />
@@ -345,11 +348,176 @@ const { data } = useDashboard();
     </VStack>
   );
 
+  const renderMarks = () => (
+    <Card.Root>
+      <Card.Header>
+        <Heading size="lg" color="gray.900">Detailed Marks</Heading>
+      </Card.Header>
+      <Card.Body>
+        <Box overflowX="auto">
+          <Table.Root variant="simple">
+            <Table.Header bg="red.50">
+              <Table.Row>
+                <Table.ColumnHeader color="#640000">Subject</Table.ColumnHeader>
+                <Table.ColumnHeader color="#640000">Exam Code</Table.ColumnHeader>
+                <Table.ColumnHeader color="#640000">Event</Table.ColumnHeader>
+                <Table.ColumnHeader color="#640000" isNumeric>Obtained</Table.ColumnHeader>
+                <Table.ColumnHeader color="#640000" isNumeric>Full Marks</Table.ColumnHeader>
+                <Table.ColumnHeader color="#640000" isNumeric>Effective</Table.ColumnHeader>
+                <Table.ColumnHeader color="#640000">Status</Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {marks.map((mark, index) => (
+                <Table.Row key={index} _hover={{ bg: "gray.50" }}>
+                  <Table.Cell fontWeight="medium">{mark.subject}</Table.Cell>
+                  <Table.Cell color="gray.500">{mark.examCode}</Table.Cell>
+                  <Table.Cell color="gray.500">{mark.event}</Table.Cell>
+                  <Table.Cell isNumeric fontWeight="medium">{mark.obtainedMarks}</Table.Cell>
+                  <Table.Cell isNumeric color="gray.500">{mark.fullMarks}</Table.Cell>
+                  <Table.Cell isNumeric fontWeight="medium">{mark.effectiveMarks}</Table.Cell>
+                  <Table.Cell>
+                    <Badge 
+                      colorScheme={mark.status === 'Pass' ? 'green' : 'red'}
+                      variant="subtle"
+                    >
+                      {mark.status}
+                    </Badge>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Root>
+        </Box>
+      </Card.Body>
+    </Card.Root>
+  );
+
+  const renderGrades = () => (
+    <Card.Root>
+      <Card.Header>
+        <Heading size="lg" color="gray.900">Subject Grades</Heading>
+      </Card.Header>
+      <Card.Body>
+        <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
+          {subjectGrades.map((grade, index) => (
+            <Card.Root key={index} variant="outline" _hover={{ shadow: "md" }}>
+              <Card.Body>
+                <VStack align="stretch" spacing={3}>
+                  <Heading size="sm" color="gray.900">{grade.subject}</Heading>
+                  <VStack align="stretch" spacing={2} fontSize="sm" color="gray.600">
+                    <HStack justify="space-between">
+                      <Text fontWeight="medium">Exam Code:</Text>
+                      <Text>{grade.examCode}</Text>
+                    </HStack>
+                    <HStack justify="space-between">
+                      <Text fontWeight="medium">Marks:</Text>
+                      <Text>{grade.marksObtained}/{grade.maxMarks}</Text>
+                    </HStack>
+                    <HStack justify="space-between">
+                      <Text fontWeight="medium">Percentage:</Text>
+                      <Text>{Math.round((grade.marksObtained/grade.maxMarks)*100)}%</Text>
+                    </HStack>
+                  </VStack>
+                  <Box>
+                    <Badge 
+                      size="lg" 
+                      fontWeight="bold"
+                      colorScheme={
+                        grade.grade.startsWith('A') ? 'green' :
+                        grade.grade.startsWith('B') ? 'blue' : 'yellow'
+                      }
+                      variant="subtle"
+                      px={3}
+                      py={1}
+                      borderRadius="full"
+                    >
+                      {grade.grade}
+                    </Badge>
+                  </Box>
+                </VStack>
+              </Card.Body>
+            </Card.Root>
+          ))}
+        </Grid>
+      </Card.Body>
+    </Card.Root>
+  );
+
+  const renderCGPAReports = () => (
+    <VStack spacing={6} align="stretch">
+      <Card.Root>
+        <Card.Header>
+          <Heading size="lg" color="gray.900">CGPA Reports</Heading>
+        </Card.Header>
+        <Card.Body>
+          <Box overflowX="auto">
+            <Table.Root variant="simple">
+              <Table.Header bg="red.50">
+                <Table.Row>
+                  <Table.ColumnHeader color="#640000">Semester</Table.ColumnHeader>
+                  <Table.ColumnHeader color="#640000" isNumeric>Course Credit</Table.ColumnHeader>
+                  <Table.ColumnHeader color="#640000" isNumeric>Earned Credit</Table.ColumnHeader>
+                  <Table.ColumnHeader color="#640000" isNumeric>Points Secured</Table.ColumnHeader>
+                  <Table.ColumnHeader color="#640000" isNumeric>SGPA</Table.ColumnHeader>
+                  <Table.ColumnHeader color="#640000" isNumeric>CGPA</Table.ColumnHeader>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {cgpaReports.map((report, index) => (
+                  <Table.Row key={index} _hover={{ bg: "gray.50" }}>
+                    <Table.Cell fontWeight="medium">
+                      {report.examCode.substring(0, 4)} {report.examCode.includes('ODD') ? 'Odd' : 'Even'}
+                    </Table.Cell>
+                    <Table.Cell isNumeric color="gray.500">{report.courseCredit}</Table.Cell>
+                    <Table.Cell isNumeric color="gray.500">{report.earnedCredit}</Table.Cell>
+                    <Table.Cell isNumeric color="gray.500">{report.pointsSecured}</Table.Cell>
+                    <Table.Cell isNumeric fontWeight="medium">{report.sgpa.toFixed(2)}</Table.Cell>
+                    <Table.Cell isNumeric fontWeight="bold" color="#640000">{report.cgpa.toFixed(2)}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
+          </Box>
+        </Card.Body>
+      </Card.Root>
+
+      {/* CGPA Detailed Trend */}
+      <Card.Root>
+        <Card.Header>
+          <Heading size="md" color="gray.900">CGPA & SGPA Trend Analysis</Heading>
+        </Card.Header>
+        <Card.Body>
+          <Box h="400px">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={cgpaTrend}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis 
+                  dataKey="semester" 
+                  angle={-45}
+                  textAnchor="end"
+                  height={80}
+                />
+                <YAxis domain={[0, 10]} />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="cgpa" stroke="#640000" strokeWidth={3} name="CGPA" dot={{ r: 6 }} />
+                <Line type="monotone" dataKey="sgpa" stroke="#A00000" strokeWidth={2} name="SGPA" dot={{ r: 4 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </Box>
+        </Card.Body>
+      </Card.Root>
+    </VStack>
+  );
+
   return (
     <Box minH="100vh" bg="gray.50">
       {/* Header */}
       <Topbar />
-        {renderOverview()}
+
+      {/* Main Content */}
+      {renderGrades()}
     </Box>
   );
 };
