@@ -31,7 +31,7 @@ export function DashboardProvider({ children }) {
       }
 
       const json = await res.json();
-      console.log('Server Fetched Data', json)
+
       const encrypted = encrypt(json);
       localStorage.setItem('dashboardData', encrypted);
 
@@ -55,7 +55,7 @@ export function DashboardProvider({ children }) {
         } else {
           // If nothing in storage, fetch from server
           await fetchDashboard();
-          console.log('Fetched dashboard data from server');
+
         }
 
         // Always try background refresh

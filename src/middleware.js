@@ -9,12 +9,10 @@ export async function middleware(request) {
   const jwtData = token ? await verifyJWT(token) : null;
 
   if (!jwtData && !isLoginPage) {
-    console.log('Redirecting to /login because user is not authenticated');
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
   if (jwtData && isLoginPage) {
-    console.log('Redirecting to / because user is already authenticated');
     return NextResponse.redirect(new URL('/', request.url));
   }
 

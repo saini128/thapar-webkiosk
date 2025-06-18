@@ -323,7 +323,6 @@ const Dashboard = () => {
 
     const getLatestExamCode = () => {
         if (!marks.length) return "N/A";
-        console.log("Marks data:", marks[marks.length - 1].examCode); // Debugging line to check marks structure
 
         // Get unique exam codes from marks data
         const uniqueExamCodes = [...new Set(marks.map(m => m.examCode))];

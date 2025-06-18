@@ -29,12 +29,10 @@ export default function LoginPage() {
 
       if (res.ok) {
         router.push('/');
-        console.log('Login successful');
       } else {
         setError('Incorrect member code or password.');
       }
     } catch (err) {
-      console.log('Login error:', err);
       setError(err.message || 'An unexpected error occurred. Please try again later.');
     } finally {
       setIsLoading(false);

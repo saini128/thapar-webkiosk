@@ -21,7 +21,6 @@ export const Sidebar = () => {
 
   const isActive = (href) => pathname === href;
 
-  console.log('Current Path:', pathname);
   return (
     <Flex
       w={["100%", "100%", "10%", "15%", "15%"]}
