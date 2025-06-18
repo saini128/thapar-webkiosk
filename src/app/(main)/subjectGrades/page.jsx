@@ -1,525 +1,300 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Text,
-  Card,
-  Stat,
-  Table,
-  Badge,
-  Tabs,
-  Icon,
-  Container,
-  VStack,
-  HStack,
+    Box,
+    Flex,
+    Grid,
+    Heading,
+    Text,
+    Card,
+    Stat,
+    Table,
+    Badge,
+    Tabs,
+    Icon,
+    Container,
+    VStack,
+    HStack,
+    Button,
+    ButtonGroup,
 } from '@chakra-ui/react';
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, PieChart, Pie, Cell, Legend
-} from 'recharts';
-import { 
-  FiBook, FiAward, FiTrendingUp, FiUser, 
-  FiMail, FiPhone, FiMapPin, FiCalendar, FiHome
+
+import {
+    FiBook, FiAward, FiTrendingUp,
+    FiFilter
 } from 'react-icons/fi';
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
 
-// Mock data matching your models structure
-const mockData = {
-  studentProfile: {
-    name: "John Doe",
-    enrollmentNo: "101004001",
-    fatherName: "Robert Doe",
-    motherName: "Jane Doe",
-    dob: "2000-05-15",
-    course: "B.Tech Computer Science",
-    semester: "6th Semester",
-    studentMobile: "+91 9876543210",
-    studentEmail: ["john.doe@student.thapar.edu"],
-    correspondenceAddress: "123 Main St, New Delhi, 110001, Delhi"
-  },
-  marks: [
-    { examCode: "2324ODDSEM", subject: "Data Structures", event: "MST1", fullMarks: 30, obtainedMarks: 25, weightage: 15, effectiveMarks: 12.5, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Data Structures", event: "MST2", fullMarks: 30, obtainedMarks: 28, weightage: 15, effectiveMarks: 14, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Data Structures", event: "ESE", fullMarks: 70, obtainedMarks: 58, weightage: 70, effectiveMarks: 58, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Computer Networks", event: "MST1", fullMarks: 30, obtainedMarks: 22, weightage: 15, effectiveMarks: 11, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Computer Networks", event: "MST2", fullMarks: 30, obtainedMarks: 26, weightage: 15, effectiveMarks: 13, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Computer Networks", event: "ESE", fullMarks: 70, obtainedMarks: 55, weightage: 70, effectiveMarks: 55, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Database Systems", event: "MST1", fullMarks: 30, obtainedMarks: 27, weightage: 15, effectiveMarks: 13.5, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Database Systems", event: "MST2", fullMarks: 30, obtainedMarks: 29, weightage: 15, effectiveMarks: 14.5, status: "Pass" },
-    { examCode: "2324ODDSEM", subject: "Database Systems", event: "ESE", fullMarks: 70, obtainedMarks: 62, weightage: 70, effectiveMarks: 62, status: "Pass" },
-    { examCode: "2324EVENSEM", subject: "Software Engineering", event: "MST1", fullMarks: 30, obtainedMarks: 24, weightage: 15, effectiveMarks: 12, status: "Pass" },
-    { examCode: "2324EVENSEM", subject: "Software Engineering", event: "ESE", fullMarks: 70, obtainedMarks: 60, weightage: 70, effectiveMarks: 60, status: "Pass" }
-  ],
-  subjectGrades: [
-    { subject: "Data Structures", examCode: "2324ODDSEM", marksObtained: 84.5, maxMarks: 100, grade: "A" },
-    { subject: "Computer Networks", examCode: "2324ODDSEM", marksObtained: 79, maxMarks: 100, grade: "A-" },
-    { subject: "Database Systems", examCode: "2324ODDSEM", marksObtained: 90, maxMarks: 100, grade: "A+" },
-    { subject: "Software Engineering", examCode: "2324EVENSEM", marksObtained: 72, maxMarks: 100, grade: "B+" }
-  ],
-  cgpaReports: [
-    { examCode: "2122ODDSEM", courseCredit: 20, earnedCredit: 20, pointsSecured: 160, sgpa: 8.0, cgpa: 8.0 },
-    { examCode: "2122EVENSEM", courseCredit: 22, earnedCredit: 22, pointsSecured: 176, sgpa: 8.0, cgpa: 8.0 },
-    { examCode: "2223ODDSEM", courseCredit: 21, earnedCredit: 21, pointsSecured: 168, sgpa: 8.0, cgpa: 8.0 },
-    { examCode: "2223EVENSEM", courseCredit: 20, earnedCredit: 20, pointsSecured: 170, sgpa: 8.5, cgpa: 8.13 },
-    { examCode: "2324ODDSEM", courseCredit: 19, earnedCredit: 19, pointsSecured: 161.5, sgpa: 8.5, cgpa: 8.2 },
-    { examCode: "2324EVENSEM", courseCredit: 18, earnedCredit: 18, pointsSecured: 144, sgpa: 8.0, cgpa: 8.17 }
-  ]
-};
-
 const StatCard = ({ icon, title, value, subtitle, ...props }) => {
-  return (
-    <Card.Root borderLeft="4px" borderLeftColor="#640000" {...props}>
-      <Card.Body>
-        <Flex justify="space-between" align="center">
-          <Box>
-            <Stat.Root>
-              <Stat.Label color="gray.600" fontSize="sm" fontWeight="medium">
-                {title}
-              </Stat.Label>
-              <Stat.ValueText fontSize="2xl" fontWeight="bold" color="gray.900">
-                {value}
-              </Stat.ValueText>
-              {subtitle && (
-                <Stat.HelpText color="gray.500" fontSize="sm" mt={1}>
-                  {subtitle}
-                </Stat.HelpText>
-              )}
-            </Stat.Root>
-          </Box>
-          <Box p={3} bg="#640000" borderRadius="full">
-            <Icon as={icon} w={6} h={6} color="white" />
-          </Box>
-        </Flex>
-      </Card.Body>
-    </Card.Root>
-  );
-};
-
-const InfoCard = ({ icon, title, value }) => {
-  return (
-    <Card.Root shadow="sm">
-      <Card.Body>
-        <Flex align="center" gap={3}>
-          <Box p={2} bg="red.100" borderRadius="lg">
-            <Icon as={icon} w={5} h={5} color="#640000" />
-          </Box>
-          <Box>
-            <Text fontSize="sm" color="gray.600">{title}</Text>
-            <Text fontWeight="medium" color="gray.900">{value}</Text>
-          </Box>
-        </Flex>
-      </Card.Body>
-    </Card.Root>
-  );
+    return (
+        <Card.Root borderLeft="4px" borderLeftColor="#640000" w="full" {...props}>
+            <Card.Body>
+                <Flex justify="space-between" align="center">
+                    <Box>
+                        <Stat.Root>
+                            <Stat.Label color="gray.600" fontSize="sm" fontWeight="medium">
+                                {title}
+                            </Stat.Label>
+                            <Stat.ValueText fontSize="2xl" fontWeight="bold" color="gray.900">
+                                {value}
+                            </Stat.ValueText>
+                            {subtitle && (
+                                <Stat.HelpText color="gray.500" fontSize="sm" mt={1}>
+                                    {subtitle}
+                                </Stat.HelpText>
+                            )}
+                        </Stat.Root>
+                    </Box>
+                    <Box p={3} bg="#640000" borderRadius="full">
+                        <Icon as={icon} w={6} h={6} color="white" />
+                    </Box>
+                </Flex>
+            </Card.Body>
+        </Card.Root>
+    );
 };
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-const { data } = useDashboard();
+    const { data } = useDashboard();
 
-  if (!data) return null;
-  const {
-    enrollmentNo,
-    studentProfile,
-    marks,
-    subjectGrades,
-    cgpaReports,
-    timestamp,
-  } = data;
-  console.log(data);
-  // Calculate current semester from latest examCode
-  const getCurrentSemester = () => {
-    if (!cgpaReports.length) return "N/A";
-    const latest = cgpaReports[cgpaReports.length - 1];
-    const year = latest.examCode.substring(0, 4);
-    const sem = latest.examCode.includes('ODD') ? 'Odd' : 'Even';
-    return `${year} ${sem} Semester`;
-  };
+    // Always call hooks unconditionally
+    const [selectedSemester, setSelectedSemester] = useState('all');
+    const [isInitialized, setIsInitialized] = useState(false);
 
-  // Get current semester marks for bar chart
-  const getCurrentSemesterMarks = () => {
-    const currentSemCode = cgpaReports.length > 0 ? 
-      cgpaReports[cgpaReports.length - 1].examCode : "2324ODDSEM";
-    
-    const semesterMarks = marks.filter(mark => mark.examCode === currentSemCode);
-    
-    const subjectTotals = {};
-    semesterMarks.forEach(mark => {
-      if (!subjectTotals[mark.subject]) {
-        subjectTotals[mark.subject] = { total: 0, maxTotal: 0 };
-      }
-      subjectTotals[mark.subject].total += mark.obtainedMarks;
-      subjectTotals[mark.subject].maxTotal += mark.fullMarks;
-    });
+    // Safe fallback if data is null
+    const subjectGrades = data?.subjectGrades || [];
 
-    return Object.entries(subjectTotals).map(([subject, marks]) => ({
-      subject: subject.length > 15 ? subject.substring(0, 15) + '...' : subject,
-      marks: marks.total,
-      maxMarks: marks.maxTotal,
-      percentage: Math.round((marks.total / marks.maxTotal) * 100)
-    }));
-  };
+    // Calculate available semesters using useMemo to prevent unnecessary recalculations
+    const availableSemesters = useMemo(() => {
+        const semesters = [...new Set(subjectGrades.map(grade => grade.examCode))];
+        return semesters.sort((a, b) => {
+            const getYear = (code) => parseInt(code.substring(0, 4));
+            const getSemType = (code) => code.includes('ODD') ? 0 : 1;
 
-  // CGPA trend data
-  const cgpaTrend = cgpaReports.map(report => ({
-    semester: report.examCode.substring(0, 4) + (report.examCode.includes('ODD') ? ' Odd' : ' Even'),
-    cgpa: report.cgpa,
-    sgpa: report.sgpa
-  }));
+            const yearA = getYear(a);
+            const yearB = getYear(b);
 
-  // Grade distribution
-  const gradeDistribution = subjectGrades.reduce((acc, grade) => {
-    acc[grade.grade] = (acc[grade.grade] || 0) + 1;
-    return acc;
-  }, {});
+            if (yearA !== yearB) return yearB - yearA;
+            return getSemType(b) - getSemType(a);
+        });
+    }, [subjectGrades]);
 
-  const gradeData = Object.entries(gradeDistribution).map(([grade, count]) => ({
-    grade,
-    count,
-    color: {
-      'A+': '#640000',
-      'A': '#800000',
-      'A-': '#A00000',
-      'B+': '#C00000',
-      'B': '#E00000',
-      'B-': '#FF4444'
-    }[grade] || '#888888'
-  }));
+    // Only set default semester once when component first loads
+    useEffect(() => {
+        if (availableSemesters.length > 0 && !isInitialized) {
+            setSelectedSemester(availableSemesters[0]); // default to latest
+            setIsInitialized(true);
+        }
+    }, [availableSemesters, isInitialized]);
 
-  const currentSemesterMarks = getCurrentSemesterMarks();
-  const currentCGPA = cgpaReports.length > 0 ? cgpaReports[cgpaReports.length - 1].cgpa : 0;
-  const currentSGPA = cgpaReports.length > 0 ? cgpaReports[cgpaReports.length - 1].sgpa : 0;
-  const totalSubjects = new Set(subjectGrades.map(grade => grade.subject)).size;
+    // Optional render null if no usable data yet
+    if (!data) return null;
 
-  const renderOverview = () => (
-    
-    <VStack spacing={6} align="stretch">
-      {/* Stats Grid */}
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }} gap={6}>
-        <StatCard
-          icon={FiBook}
-          title="Total Subjects"
-          value={totalSubjects}
-          subtitle="Subjects Completed"
-        />
-        <StatCard
-          icon={FiTrendingUp}
-          title="Current CGPA"
-          value={currentCGPA.toFixed(2)}
-          subtitle="Overall Performance"
-        />
-        <StatCard
-          icon={FiAward}
-          title="Current SGPA"
-          value={currentSGPA.toFixed(2)}
-          subtitle="Semester Performance"
-        />
-        <StatCard
-          icon={FiAward}
-          title="Total Semesters"
-          value={cgpaReports.length}
-          subtitle="Completed"
-        />
-      </Grid>
+    // Convert exam codes to readable format
+    const formatSemester = (examCode) => {
+        const year = examCode.substring(0, 4);
+        const semType = examCode.includes('ODD') ? 'Odd' : 'Even';
+        return `${year} ${semType}`;
+    };
 
-      {/* Charts Row */}
-      <Grid templateColumns={{ base: "1fr", lg: "repeat(2, 1fr)" }} gap={6}>
-        {/* Current Semester Marks */}
-        <Card.Root>
-          <Card.Header>
-            <Heading size="md" color="gray.900">Current Semester Performance</Heading>
-          </Card.Header>
-          <Card.Body>
-            <Box h="300px">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={currentSemesterMarks}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis 
-                    dataKey="subject" 
-                    angle={-45}
-                    textAnchor="end"
-                    height={80}
-                    fontSize={12}
-                  />
-                  <YAxis />
-                  <Tooltip 
-                    formatter={(value, name) => [
-                      name === 'marks' ? `${value} marks` : `${value}%`,
-                      name === 'marks' ? 'Obtained' : 'Percentage'
-                    ]}
-                  />
-                  <Bar dataKey="marks" fill="#640000" />
-                </BarChart>
-              </ResponsiveContainer>
-            </Box>
-          </Card.Body>
-        </Card.Root>
+    // Filter grades based on selected semester
+    const filteredGrades = selectedSemester === 'all'
+        ? subjectGrades
+        : subjectGrades.filter(grade => grade.examCode === selectedSemester);
 
-        {/* CGPA Trend */}
-        <Card.Root>
-          <Card.Header>
-            <Heading size="md" color="gray.900">CGPA Trend</Heading>
-          </Card.Header>
-          <Card.Body>
-            <Box h="300px">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={cgpaTrend}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis 
-                    dataKey="semester" 
-                    angle={-45}
-                    textAnchor="end"
-                    height={80}
-                    fontSize={12}
-                  />
-                  <YAxis domain={[0, 10]} />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="cgpa" stroke="#640000" strokeWidth={3} name="CGPA" />
-                  <Line type="monotone" dataKey="sgpa" stroke="#A00000" strokeWidth={2} name="SGPA" />
-                </LineChart>
-              </ResponsiveContainer>
-            </Box>
-          </Card.Body>
-        </Card.Root>
-      </Grid>
+    const grades = filteredGrades;
+    const totalSubjects = grades.length;
+    const averageMarks = grades.length > 0
+        ? Math.round(grades.reduce((sum, grade) => sum + grade.marksObtained, 0) / grades.length)
+        : 0;
 
-      {/* Personal Info & Grade Distribution */}
-      <Grid templateColumns={{ base: "1fr", lg: "2fr 1fr" }} gap={6}>
-        {/* Personal Information */}
-        <Card.Root>
-          <Card.Header>
-            <Heading size="md" color="gray.900">Personal Information</Heading>
-          </Card.Header>
-          <Card.Body>
-            <VStack spacing={4} align="stretch">
-              <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={4}>
-                <InfoCard icon={FiUser} title="Name" value={studentProfile.name} />
-                <InfoCard icon={FiAward} title="Enrollment No." value={studentProfile.enrollmentNo} />
-                <InfoCard icon={FiBook} title="Course" value={studentProfile.course} />
-                <InfoCard icon={FiCalendar} title="Current Semester" value={getCurrentSemester()} />
-                <InfoCard icon={FiMail} title="Email" value={studentProfile.studentEmail[0]} />
-                <InfoCard icon={FiPhone} title="Mobile" value={studentProfile.studentMobile} />
-              </Grid>
-              <InfoCard 
-                icon={FiMapPin} 
-                title="Address" 
-                value={studentProfile.correspondenceAddress} 
-              />
+    const gradeDistribution = grades.reduce((acc, grade) => {
+        acc[grade.grade] = (acc[grade.grade] || 0) + 1;
+        return acc;
+    }, {});
+
+    const highestGrade = Object.keys(gradeDistribution).sort((a, b) => {
+        const gradeOrder = { 'A+': 10, 'A': 9, 'A-': 8, 'B+': 7, 'B': 6, 'B-': 5, 'C+': 4, 'C': 3, 'C-': 2, 'D': 1, 'F': 0 };
+        return (gradeOrder[b] || 0) - (gradeOrder[a] || 0);
+    })[0] || 'N/A';
+
+    const statistics = { totalSubjects, averageMarks, highestGrade };
+
+    const renderGrades = () => (
+        <Box w="full" px={{ base: 4, md: 6, lg: 8 }} py={6}>
+            <VStack spacing={6} align="stretch" w="full">
+                {/* Page Header */}
+                <Box>
+                    <Heading size="2xl" color="gray.900" mb={2}>Subject Grades</Heading>
+                    <Text color="gray.600" fontSize="lg">
+                        View and filter your academic performance by semester
+                    </Text>
+                </Box>
+
+                {/* Statistics Cards */}
+                <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={6} w="full">
+                    <StatCard
+                        icon={FiBook}
+                        title="Total Subjects"
+                        value={statistics.totalSubjects}
+                        subtitle={selectedSemester === 'all' ? 'All Semesters' : formatSemester(selectedSemester)}
+                    />
+                    <StatCard
+                        icon={FiTrendingUp}
+                        title="Average Marks"
+                        value={`${statistics.averageMarks}%`}
+                        subtitle="Overall Performance"
+                    />
+                    <StatCard
+                        icon={FiAward}
+                        title="Highest Grade"
+                        value={statistics.highestGrade}
+                        subtitle="Best Achievement"
+                    />
+                </Grid>
+
+                {/* Filter Section */}
+                <Card.Root w="full">
+                    <Card.Header>
+                        <Flex align="center" gap={3} wrap="wrap">
+                            <Icon as={FiFilter} color="#640000" />
+                            <Heading size="md" color="gray.900">Filter by Semester</Heading>
+                        </Flex>
+                    </Card.Header>
+                    <Card.Body>
+                        <Flex wrap="wrap" gap={3}>
+                            <Button
+                                size="sm"
+                                variant={selectedSemester === 'all' ? 'solid' : 'outline'}
+                                bg={selectedSemester === 'all' ? '#640000' : 'transparent'}
+                                color={selectedSemester === 'all' ? 'white' : '#640000'}
+                                borderColor="#640000"
+                                _hover={{
+                                    bg: selectedSemester === 'all' ? '#500000' : '#640000',
+                                    color: 'white'
+                                }}
+                                onClick={() => setSelectedSemester('all')}
+                            >
+                                All Semesters ({subjectGrades.length})
+                            </Button>
+                            {availableSemesters.map((semester) => (
+                                <Button
+                                    key={semester}
+                                    size="sm"
+                                    variant={selectedSemester === semester ? 'solid' : 'outline'}
+                                    bg={selectedSemester === semester ? '#640000' : 'transparent'}
+                                    color={selectedSemester === semester ? 'white' : '#640000'}
+                                    borderColor="#640000"
+                                    _hover={{
+                                        bg: selectedSemester === semester ? '#500000' : '#640000',
+                                        color: 'white'
+                                    }}
+                                    onClick={() => setSelectedSemester(semester)}
+                                >
+                                    {formatSemester(semester)} ({subjectGrades.filter(g => g.examCode === semester).length})
+                                </Button>
+                            ))}
+                        </Flex>
+                    </Card.Body>
+                </Card.Root>
+
+                {/* Grades Grid */}
+                <Card.Root w="full">
+                    <Card.Header>
+                        <Heading size="lg" color="gray.900">
+                            {selectedSemester === 'all'
+                                ? 'All Subject Grades'
+                                : `${formatSemester(selectedSemester)} Grades`}
+                        </Heading>
+                        <Text color="gray.600" mt={1}>
+                            Showing {filteredGrades.length} subject{filteredGrades.length !== 1 ? 's' : ''}
+                        </Text>
+                    </Card.Header>
+                    <Card.Body>
+                        {filteredGrades.length > 0 ? (
+                            <Grid
+                                templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+                                gap={6}
+                                w="full"
+                            >
+                                {filteredGrades.map((grade, index) => (
+                                    <Card.Root
+                                        key={index}
+                                        variant="outline"
+                                        _hover={{ shadow: "md", transform: "translateY(-2px)" }}
+                                        transition="all 0.2s"
+                                        w="full"
+                                    >
+                                        <Card.Body>
+                                            <VStack align="stretch" spacing={3}>
+                                                <Heading size="sm" color="gray.900" noOfLines={2}>
+                                                    {grade.subject}
+                                                </Heading>
+                                                <VStack align="stretch" spacing={2} fontSize="sm" color="gray.600">
+                                                    <HStack justify="space-between">
+                                                        <Text fontWeight="medium">Semester:</Text>
+                                                        <Text>{formatSemester(grade.examCode)}</Text>
+                                                    </HStack>
+                                                    <HStack justify="space-between">
+                                                        <Text fontWeight="medium">Marks:</Text>
+                                                        <Text fontWeight="semibold">{grade.marksObtained}/{grade.maxMarks}</Text>
+                                                    </HStack>
+                                                    <HStack justify="space-between">
+                                                        <Text fontWeight="medium">Percentage:</Text>
+                                                        <Text fontWeight="semibold" color="gray.900">
+                                                            {Math.round((grade.marksObtained / grade.maxMarks) * 100)}%
+                                                        </Text>
+                                                    </HStack>
+                                                </VStack>
+                                                <Flex justify="center">
+                                                    <Badge
+                                                        size="lg"
+                                                        fontWeight="bold"
+                                                        colorScheme={
+                                                            grade.grade.startsWith('A') ? 'green' :
+                                                                grade.grade.startsWith('B') ? 'blue' :
+                                                                    grade.grade.startsWith('C') ? 'yellow' : 'red'
+                                                        }
+                                                        variant="subtle"
+                                                        px={4}
+                                                        py={2}
+                                                        borderRadius="full"
+                                                        fontSize="md"
+                                                    >
+                                                        {grade.grade}
+                                                    </Badge>
+                                                </Flex>
+                                            </VStack>
+                                        </Card.Body>
+                                    </Card.Root>
+                                ))}
+                            </Grid>
+                        ) : (
+                            <Box textAlign="center" py={12}>
+                                <Icon as={FiBook} w={12} h={12} color="gray.400" mb={4} />
+                                <Heading size="md" color="gray.500" mb={2}>No grades found</Heading>
+                                <Text color="gray.400">
+                                    No subject grades available for the selected semester.
+                                </Text>
+                            </Box>
+                        )}
+                    </Card.Body>
+                </Card.Root>
             </VStack>
-          </Card.Body>
-        </Card.Root>
-
-        {/* Grade Distribution */}
-        <Card.Root>
-          <Card.Header>
-            <Heading size="md" color="gray.900">Grade Distribution</Heading>
-          </Card.Header>
-          <Card.Body>
-            <Box h="250px">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={gradeData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={40}
-                    outerRadius={80}
-                    dataKey="count"
-                    nameKey="grade"
-                  >
-                    {gradeData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </Box>
-          </Card.Body>
-        </Card.Root>
-      </Grid>
-    </VStack>
-  );
-
-  const renderMarks = () => (
-    <Card.Root>
-      <Card.Header>
-        <Heading size="lg" color="gray.900">Detailed Marks</Heading>
-      </Card.Header>
-      <Card.Body>
-        <Box overflowX="auto">
-          <Table.Root variant="simple">
-            <Table.Header bg="red.50">
-              <Table.Row>
-                <Table.ColumnHeader color="#640000">Subject</Table.ColumnHeader>
-                <Table.ColumnHeader color="#640000">Exam Code</Table.ColumnHeader>
-                <Table.ColumnHeader color="#640000">Event</Table.ColumnHeader>
-                <Table.ColumnHeader color="#640000" isNumeric>Obtained</Table.ColumnHeader>
-                <Table.ColumnHeader color="#640000" isNumeric>Full Marks</Table.ColumnHeader>
-                <Table.ColumnHeader color="#640000" isNumeric>Effective</Table.ColumnHeader>
-                <Table.ColumnHeader color="#640000">Status</Table.ColumnHeader>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {marks.map((mark, index) => (
-                <Table.Row key={index} _hover={{ bg: "gray.50" }}>
-                  <Table.Cell fontWeight="medium">{mark.subject}</Table.Cell>
-                  <Table.Cell color="gray.500">{mark.examCode}</Table.Cell>
-                  <Table.Cell color="gray.500">{mark.event}</Table.Cell>
-                  <Table.Cell isNumeric fontWeight="medium">{mark.obtainedMarks}</Table.Cell>
-                  <Table.Cell isNumeric color="gray.500">{mark.fullMarks}</Table.Cell>
-                  <Table.Cell isNumeric fontWeight="medium">{mark.effectiveMarks}</Table.Cell>
-                  <Table.Cell>
-                    <Badge 
-                      colorScheme={mark.status === 'Pass' ? 'green' : 'red'}
-                      variant="subtle"
-                    >
-                      {mark.status}
-                    </Badge>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Root>
         </Box>
-      </Card.Body>
-    </Card.Root>
-  );
+    );
 
-  const renderGrades = () => (
-    <Card.Root>
-      <Card.Header>
-        <Heading size="lg" color="gray.900">Subject Grades</Heading>
-      </Card.Header>
-      <Card.Body>
-        <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-          {subjectGrades.map((grade, index) => (
-            <Card.Root key={index} variant="outline" _hover={{ shadow: "md" }}>
-              <Card.Body>
-                <VStack align="stretch" spacing={3}>
-                  <Heading size="sm" color="gray.900">{grade.subject}</Heading>
-                  <VStack align="stretch" spacing={2} fontSize="sm" color="gray.600">
-                    <HStack justify="space-between">
-                      <Text fontWeight="medium">Exam Code:</Text>
-                      <Text>{grade.examCode}</Text>
-                    </HStack>
-                    <HStack justify="space-between">
-                      <Text fontWeight="medium">Marks:</Text>
-                      <Text>{grade.marksObtained}/{grade.maxMarks}</Text>
-                    </HStack>
-                    <HStack justify="space-between">
-                      <Text fontWeight="medium">Percentage:</Text>
-                      <Text>{Math.round((grade.marksObtained/grade.maxMarks)*100)}%</Text>
-                    </HStack>
-                  </VStack>
-                  <Box>
-                    <Badge 
-                      size="lg" 
-                      fontWeight="bold"
-                      colorScheme={
-                        grade.grade.startsWith('A') ? 'green' :
-                        grade.grade.startsWith('B') ? 'blue' : 'yellow'
-                      }
-                      variant="subtle"
-                      px={3}
-                      py={1}
-                      borderRadius="full"
-                    >
-                      {grade.grade}
-                    </Badge>
-                  </Box>
-                </VStack>
-              </Card.Body>
-            </Card.Root>
-          ))}
-        </Grid>
-      </Card.Body>
-    </Card.Root>
-  );
+    return (
+        <Box minH="100vh" bg="gray.50" w="100vw" maxW="100%" overflowX="hidden">
+            {/* Header */}
+            <Topbar />
 
-  const renderCGPAReports = () => (
-    <VStack spacing={6} align="stretch">
-      <Card.Root>
-        <Card.Header>
-          <Heading size="lg" color="gray.900">CGPA Reports</Heading>
-        </Card.Header>
-        <Card.Body>
-          <Box overflowX="auto">
-            <Table.Root variant="simple">
-              <Table.Header bg="red.50">
-                <Table.Row>
-                  <Table.ColumnHeader color="#640000">Semester</Table.ColumnHeader>
-                  <Table.ColumnHeader color="#640000" isNumeric>Course Credit</Table.ColumnHeader>
-                  <Table.ColumnHeader color="#640000" isNumeric>Earned Credit</Table.ColumnHeader>
-                  <Table.ColumnHeader color="#640000" isNumeric>Points Secured</Table.ColumnHeader>
-                  <Table.ColumnHeader color="#640000" isNumeric>SGPA</Table.ColumnHeader>
-                  <Table.ColumnHeader color="#640000" isNumeric>CGPA</Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {cgpaReports.map((report, index) => (
-                  <Table.Row key={index} _hover={{ bg: "gray.50" }}>
-                    <Table.Cell fontWeight="medium">
-                      {report.examCode.substring(0, 4)} {report.examCode.includes('ODD') ? 'Odd' : 'Even'}
-                    </Table.Cell>
-                    <Table.Cell isNumeric color="gray.500">{report.courseCredit}</Table.Cell>
-                    <Table.Cell isNumeric color="gray.500">{report.earnedCredit}</Table.Cell>
-                    <Table.Cell isNumeric color="gray.500">{report.pointsSecured}</Table.Cell>
-                    <Table.Cell isNumeric fontWeight="medium">{report.sgpa.toFixed(2)}</Table.Cell>
-                    <Table.Cell isNumeric fontWeight="bold" color="#640000">{report.cgpa.toFixed(2)}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Root>
-          </Box>
-        </Card.Body>
-      </Card.Root>
-
-      {/* CGPA Detailed Trend */}
-      <Card.Root>
-        <Card.Header>
-          <Heading size="md" color="gray.900">CGPA & SGPA Trend Analysis</Heading>
-        </Card.Header>
-        <Card.Body>
-          <Box h="400px">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={cgpaTrend}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="semester" 
-                  angle={-45}
-                  textAnchor="end"
-                  height={80}
-                />
-                <YAxis domain={[0, 10]} />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="cgpa" stroke="#640000" strokeWidth={3} name="CGPA" dot={{ r: 6 }} />
-                <Line type="monotone" dataKey="sgpa" stroke="#A00000" strokeWidth={2} name="SGPA" dot={{ r: 4 }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </Box>
-        </Card.Body>
-      </Card.Root>
-    </VStack>
-  );
-
-  return (
-    <Box minH="100vh" bg="gray.50">
-      {/* Header */}
-      <Topbar />
-
-      {/* Main Content */}
-      {renderGrades()}
-    </Box>
-  );
+            {/* Main Content */}
+            {renderGrades()}
+        </Box>
+    );
 };
 
 export default Dashboard;

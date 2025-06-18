@@ -14,8 +14,14 @@ import {
   FiAward,
   FiHeart
 } from 'react-icons/fi';
+import { usePathname } from 'next/navigation';
 
 export const Sidebar = () => {
+  const pathname = usePathname();
+
+  const isActive = (href) => pathname === href;
+
+  console.log('Current Path:', pathname);
   return (
     <Flex
       w={["100%", "100%", "10%", "15%", "15%"]}
@@ -52,40 +58,48 @@ export const Sidebar = () => {
             {/* Home */}
             <Flex className="sidebar-items" align="center" gap={2}>
               <Link href="/" display={["none", "none", "flex"]}>
-                <Icon as={FiHome} fontSize="2xl" className="active-icon" />
+                <Icon
+                  as={FiHome}
+                  fontSize="2xl"
+                  className={isActive('/') ? 'active-icon' : ''}
+                />
               </Link>
-              <Link href="/" _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                <Text className="active">Home</Text>
+              <Link
+                href="/"
+                _hover={{ textDecor: 'none' }}
+                display={["flex", "flex", "none", "flex", "flex"]}
+              >
+                <Text className={isActive('/') ? 'active' : ''}>Home</Text>
               </Link>
             </Flex>
 
             {/* Credit */}
             <Flex className="sidebar-items" align="center" gap={2}>
               <Link href="/marks" display={["none", "none", "flex"]}>
-                <Icon as={FiBook} fontSize="2xl" />
+                <Icon as={FiBook} fontSize="2xl" className={isActive('/marks') ? 'active-icon' : ''} />
               </Link>
               <Link href="/marks" _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                <Text>Subject Wise Marks</Text>
+                <Text className={isActive('/marks') ? 'active' : ''}>Subject Wise Marks</Text>
               </Link>
             </Flex>
 
             {/* Wallet */}
             <Flex className="sidebar-items" align="center" gap={2}>
               <Link href="/subjectGrades" display={["none", "none", "flex"]}>
-                <Icon as={FiAward} fontSize="2xl" />
+                <Icon className={isActive('/subjectGrades') ? 'active-icon' : ''} as={FiAward} fontSize="2xl" />
               </Link>
               <Link href="/subjectGrades" _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                <Text>Subject Grades</Text>
+                <Text className={isActive('/subjectGrades') ? 'active' : ''} >Subject Grades</Text>
               </Link>
             </Flex>
 
             {/* Services */}
             <Flex className="sidebar-items" align="center" gap={2}>
               <Link href="/CGPAreport" display={["none", "none", "flex"]}>
-                <Icon as={FiHeart} fontSize="2xl" />
+                <Icon className={isActive('/CGPAreport') ? 'active-icon' : ''} as={FiHeart} fontSize="2xl" />
               </Link>
               <Link href="/CGPAreport" _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                <Text>CGPA Report</Text>
+                <Text className={isActive('/CGPAreport') ? 'active' : ''} >CGPA Report</Text>
               </Link>
             </Flex>
           </Flex>

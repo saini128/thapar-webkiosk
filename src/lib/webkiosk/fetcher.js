@@ -36,14 +36,7 @@ export async function fetchWebKioskPage(url, sessionId) {
     // Always get the response text, regardless of status
     const htmlContent = await response.text();
     
-    // Log response details
-    console.log(`Received response for ${url}, Status: ${status} ${statusText}`);
-    // console.log(`--- HTML Content for ${url} (truncated for console) ---`);
-    // console.log(htmlContent.substring(0, 1000) + (htmlContent.length > 1000 ? '...' : ''));
-    // console.log('----------------------------------------------------');
-
-    // For 2xx responses, validate content
-    if (response.ok) {
+   
       const validation = validateHTMLContent(url, htmlContent);
       
       if (!validation.isValid) {
@@ -59,7 +52,6 @@ export async function fetchWebKioskPage(url, sessionId) {
         };
       }
       
-      console.log(`Successfully fetched and validated ${url}`);
       return {
         status,
         statusText,
@@ -69,24 +61,24 @@ export async function fetchWebKioskPage(url, sessionId) {
         errorType: null,
         validationFailed: false
       };
-    } else {
-      // For non-2xx responses, still validate to check for specific errors
-      const validation = validateHTMLContent(url, htmlContent);
-      const errorMessage = validation.errorMessage || `HTTP ${status}: ${statusText}`;
+    // } else {
+    //   // For non-2xx responses, still validate to check for specific errors
+    //   const validation = validateHTMLContent(url, htmlContent);
+    //   const errorMessage = validation.errorMessage || `HTTP ${status}: ${statusText}`;
       
-      console.error(`Failed to fetch ${url}. Status: ${status} ${statusText}`);
-      console.error(`Error Response Body for ${url}:`, htmlContent.substring(0, 500) + (htmlContent.length > 500 ? '...' : ''));
+    //   console.error(`Failed to fetch ${url}. Status: ${status} ${statusText}`);
+    //   console.error(`Error Response Body for ${url}:`, htmlContent.substring(0, 500) + (htmlContent.length > 500 ? '...' : ''));
       
-      return {
-        status,
-        statusText,
-        success: false,
-        htmlContent,
-        errorMessage,
-        errorType: validation.errorType || 'HTTP_ERROR',
-        validationFailed: false
-      };
-    }
+    //   return {
+    //     status,
+    //     statusText,
+    //     success: false,
+    //     htmlContent,
+    //     errorMessage,
+    //     errorType: validation.errorType || 'HTTP_ERROR',
+    //     validationFailed: false
+    //   };
+    // }
   } catch (error) {
     let errorType = 'NETWORK_ERROR';
     let errorMessage = `Network error fetching ${url}: ${error.message}`;

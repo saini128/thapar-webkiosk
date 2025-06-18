@@ -6,7 +6,6 @@ import {load} from 'cheerio';
  * @returns {Object} Parsed CGPA report data
  */
 export function parseCGPAReport(htmlContent) {
-  console.log('Parsing CGPA report HTML...');
 
   try {
     const $ = load(htmlContent);

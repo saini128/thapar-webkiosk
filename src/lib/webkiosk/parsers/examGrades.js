@@ -6,7 +6,6 @@ import {load} from 'cheerio';
  * @returns {Object} Parsed exam grades data
  */
 export function parseExamGrades(htmlContent) {
-  console.log('Parsing exam grades HTML...');
 
   try {
     const $ = load(htmlContent);

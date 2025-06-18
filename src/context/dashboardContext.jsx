@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Mark, SubjectGrade, CGPAReport } from '@/lib/models/academic';
 import { StudentProfile } from '@/lib/models/profile';
 import { encrypt, decrypt } from '@/lib/utils/storageCrypto';
+import { m } from 'framer-motion';
 
 const DashboardContext = createContext();
 
@@ -15,7 +16,14 @@ export function DashboardProvider({ children }) {
 
   const fetchDashboard = useCallback(async () => {
     try {
-      const res = await fetch('/api/dashboard', { credentials: 'include' });
+      const res = await fetch('/api/dashboard', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
 
       if (res.status === 401) {
         router.push('/login');
