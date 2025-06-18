@@ -27,6 +27,7 @@ import {
 } from 'react-icons/fi';
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
+import { SEMORDER} from '@/lib/webkiosk/constants';
 
 const StatCard = ({ icon, title, value, subtitle, ...props }) => {
     return (
@@ -90,7 +91,7 @@ const Dashboard = () => {
 
     // CGPA trend data
     const cgpaTrend = cgpaReports.map(report => ({
-        semester: report.examCode.substring(0, 4) + (report.examCode.includes('ODD') ? ' Odd' : ' Even'),
+        semester: report.examCode,
         cgpa: report.cgpa,
         sgpa: report.sgpa
     }));
@@ -198,7 +199,7 @@ const Dashboard = () => {
                                     {cgpaReports.map((report, index) => (
                                         <Table.Row key={index} _hover={{ bg: "gray.50" }}>
                                             <Table.Cell fontWeight="medium">
-                                                {report.examCode.substring(0, 4)} {report.examCode.includes('ODD') ? 'Odd' : 'Even'}
+                                                {report.examCode}
                                             </Table.Cell>
                                             <Table.Cell isNumeric color="gray.500">{report.courseCredit}</Table.Cell>
                                             <Table.Cell isNumeric color="gray.500">{report.earnedCredit}</Table.Cell>

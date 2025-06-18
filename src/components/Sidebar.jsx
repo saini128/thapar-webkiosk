@@ -34,6 +34,8 @@ export const Sidebar = () => {
         flexDir="column"
         h={["auto", "auto", "100vh"]}
         justifyContent="space-between"
+        pb={[5, 6, 0]} // 👈 Padding here is also fine
+
       >
         {/* Navigation Section */}
         <Flex flexDir="column" as="nav">
@@ -104,8 +106,6 @@ export const Sidebar = () => {
             </Flex>
           </Flex>
         </Flex>
-
-        
       </Flex>
     </Flex>
   );

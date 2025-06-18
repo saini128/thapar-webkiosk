@@ -27,6 +27,12 @@ import {
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
 
+const SEMORDER = ['2223ODDSEM','AUXFEB23','2223EVESEM', 
+  '2324SUMMER', 'AUXAUG23','AUXAUX23','2324ODDSEM','AUXFEB24','2324EVESEM',
+   '2425SUMMER', 'AUXAUG24','AUXAUG24','2425ODDSEM','AUXFEB25','2425EVESEM', '2526SUMMER',
+   'AUXAUG25','AUXAUX25','2526ODDSEM','AUXFEB26','2526EVESEM', '2627SUMMER','AUXAUG26','AUXAUX26'
+   ,'2627ODDSEM','AUXFEB27','2627EVESEM', '2728SUMMER'];
+
 const StatCard = ({ icon, title, value, subtitle, ...props }) => {
     return (
         <Card.Root borderLeft="4px" borderLeftColor="#640000" w="full" {...props}>
@@ -66,19 +72,34 @@ const Dashboard = () => {
     // Safe fallback if data is null
     const subjectGrades = data?.subjectGrades || [];
 
+    // Enhanced sorting function using SEMORDER
+    const sortExamCodesBySEMORDER = (codes) => {
+        return codes.sort((a, b) => {
+            const indexA = SEMORDER.indexOf(a);
+            const indexB = SEMORDER.indexOf(b);
+            
+            // If both codes are in SEMORDER, sort by their position (latest first - reverse order)
+            if (indexA !== -1 && indexB !== -1) {
+                return indexB - indexA;
+            }
+            
+            // If only one code is in SEMORDER, prioritize it
+            if (indexA !== -1 && indexB === -1) {
+                return -1;
+            }
+            if (indexA === -1 && indexB !== -1) {
+                return 1;
+            }
+            
+            // If neither code is in SEMORDER, maintain original order
+            return 0;
+        });
+    };
+
     // Calculate available semesters using useMemo to prevent unnecessary recalculations
     const availableSemesters = useMemo(() => {
         const semesters = [...new Set(subjectGrades.map(grade => grade.examCode))];
-        return semesters.sort((a, b) => {
-            const getYear = (code) => parseInt(code.substring(0, 4));
-            const getSemType = (code) => code.includes('ODD') ? 0 : 1;
-
-            const yearA = getYear(a);
-            const yearB = getYear(b);
-
-            if (yearA !== yearB) return yearB - yearA;
-            return getSemType(b) - getSemType(a);
-        });
+        return sortExamCodesBySEMORDER(semesters);
     }, [subjectGrades]);
 
     // Only set default semester once when component first loads
@@ -94,9 +115,40 @@ const Dashboard = () => {
 
     // Convert exam codes to readable format
     const formatSemester = (examCode) => {
-        const year = examCode.substring(0, 4);
-        const semType = examCode.includes('ODD') ? 'Odd' : 'Even';
-        return `${year} ${semType}`;
+        // Handle AUX codes
+        if (examCode.startsWith('AUX')) {
+            const match = examCode.match(/^AUX(FEB|AUG|AUX)(\d{2})$/);
+            if (match) {
+                const [, type, year] = match;
+                const fullYear = 2000 + parseInt(year);
+                const typeMap = {
+                    'FEB': 'Feb Auxiliary',
+                    'AUG': 'Aug Auxiliary', 
+                    'AUX': 'Aug Auxiliary'
+                };
+                return `${fullYear} ${typeMap[type]}`;
+            }
+        }
+        
+        // Handle regular semester codes
+        const match = examCode.match(/^(\d{4})(ODD|EVE|SUMMER)(?:SEM|M?SEM)?$/);
+        if (match) {
+            const [, yearStr, semType] = match;
+            const startYear = parseInt(yearStr.substring(0, 2));
+            const endYear = parseInt(yearStr.substring(2, 4));
+            const academicYear = `20${startYear}-20${endYear}`;
+            
+            const typeMap = {
+                'ODD': 'Odd Semester',
+                'EVE': 'Even Semester',
+                'SUMMER': 'Summer'
+            };
+            
+            return `${academicYear} ${typeMap[semType]}`;
+        }
+        
+        // Fallback for unrecognized format
+        return examCode;
     };
 
     // Filter grades based on selected semester

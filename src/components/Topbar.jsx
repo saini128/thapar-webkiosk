@@ -13,6 +13,7 @@ export const Topbar = () => {
   const { studentProfile } = data;
 
   const handleSignOut = async () => {
+    localStorage.removeItem("dashboardData");
     await fetch("/api/signout", { method: "GET" });
     router.push("/login");
   };
