@@ -1,34 +1,97 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Box,
     Flex,
     Grid,
     Heading,
+    Spinner,
     Text,
     Card,
     Stat,
     Table,
-    Badge,
-    Tabs,
     Icon,
-    Container,
     VStack,
-    HStack,
 } from '@chakra-ui/react';
 import {
-    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
     LineChart, Line, PieChart, Pie, Cell, Legend
 } from 'recharts';
 import {
-    FiBook, FiAward, FiTrendingUp, FiUser,
-    FiMail, FiPhone, FiMapPin, FiCalendar, FiHome
+    FiBook, FiAward, FiTrendingUp,
 } from 'react-icons/fi';
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
-import { SEMORDER} from '@/lib/webkiosk/constants';
+const LoadingSpinner = () => (
+    <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        minH="100vh"
+        w="100vw"
+        maxW="100%"
+        bg="gray.50"
+        gap={6}
+        overflowX="hidden"
+    >
+        <Box textAlign="center">
+            <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#640000"
+                size="xl"
+                mb={4}
+            />
+            <VStack spacing={2}>
+                <Heading size="lg" color="gray.700" fontWeight="medium">
+                    Loading your CGPA Report...
+                </Heading>
+                <Text color="gray.600" fontSize="md">
+                    Your data is being loaded from Cache
+                </Text>
+                <Text color="gray.500" fontSize="sm">
+                    Please wait a moment
+                </Text>
+            </VStack>
+        </Box>
 
+        {/* Aligned bubble animation */}
+        <Box position="relative" w="60px" h="60px">
+            <Box
+                w="60px"
+                h="60px"
+                border="3px solid"
+                borderColor="gray.200"
+                borderRadius="full"
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                m="auto"
+                animation="ping 2s cubic-bezier(0, 0, 0.2, 1) infinite"
+                opacity="0.75"
+            />
+            <Box
+                w="40px"
+                h="40px"
+                bg="#640000"
+                borderRadius="full"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+            >
+                <Icon as={FiBook} color="white" w={5} h={5} />
+            </Box>
+        </Box>
+    </Flex>
+);
 const StatCard = ({ icon, title, value, subtitle, ...props }) => {
     return (
         <Card.Root borderLeft="4px" borderLeftColor="#640000" w="full" {...props}>
@@ -58,28 +121,12 @@ const StatCard = ({ icon, title, value, subtitle, ...props }) => {
     );
 };
 
-const InfoCard = ({ icon, title, value }) => {
-    return (
-        <Card.Root shadow="sm" w="full">
-            <Card.Body>
-                <Flex align="center" gap={3}>
-                    <Box p={2} bg="red.100" borderRadius="lg">
-                        <Icon as={icon} w={5} h={5} color="#640000" />
-                    </Box>
-                    <Box>
-                        <Text fontSize="sm" color="gray.600">{title}</Text>
-                        <Text fontWeight="medium" color="gray.900">{value}</Text>
-                    </Box>
-                </Flex>
-            </Card.Body>
-        </Card.Root>
-    );
-};
-
 const Dashboard = () => {
     const { data } = useDashboard();
 
-    if (!data) return null;
+    if (!data) {
+        return <LoadingSpinner />;
+    }
     const {
         studentProfile,
         marks,
@@ -110,13 +157,8 @@ const Dashboard = () => {
     const currentCGPA = cgpaReports.length > 0 ? cgpaReports[cgpaReports.length - 1].cgpa : 0;
     const currentSGPA = cgpaReports.length > 0 ? cgpaReports[cgpaReports.length - 1].sgpa : 0;
     const averageSGPA = cgpaReports.length > 0 ? cgpaReports.reduce((sum, report) => sum + report.sgpa, 0) / cgpaReports.length : 0;
-    
-    // SGPA comparison data
-    const sgpaComparison = cgpaReports.map(report => ({
-        semester: report.examCode.substring(0, 4) + (report.examCode.includes('ODD') ? ' Odd' : ' Even'),
-        sgpa: report.sgpa,
-        credits: report.earnedCredit
-    }));
+
+
 
     // Grade distribution data
     gradeDistribution = subjectGrades.reduce((acc, grade) => {
@@ -141,9 +183,9 @@ const Dashboard = () => {
         <Box w="full" px={{ base: 4, md: 6, lg: 8 }} py={6}>
             <VStack spacing={6} align="stretch" w="full">
                 {/* Stats Grid */}
-                <Grid 
-                    templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(5, 1fr)" }} 
-                    gap={6} 
+                <Grid
+                    templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(5, 1fr)" }}
+                    gap={6}
                     w="full"
                 >
                     <StatCard
@@ -274,19 +316,15 @@ const Dashboard = () => {
                     </Card.Root>
                 </Grid>
 
-                
+
             </VStack>
         </Box>
     );
 
     return (
         <Box minH="100vh" bg="gray.50" w="100vw" maxW="100%" overflowX="hidden">
-            {/* Header */}
             <Topbar />
-
-            {/* Main Content */}
             {renderCGPAReports()}
-
         </Box>
     );
 };

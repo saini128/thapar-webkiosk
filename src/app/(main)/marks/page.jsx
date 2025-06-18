@@ -6,38 +6,97 @@ import {
     Flex,
     Grid,
     Heading,
+    Spinner,
     Text,
     Card,
     Stat,
     Table,
     Badge,
     Icon,
-    Container,
     VStack,
-    HStack,
     Button,
-    ButtonGroup,
 } from '@chakra-ui/react';
 
 import {
     FiBook,
-    FiAward,
     FiTrendingUp,
     FiFilter,
-    FiCheckCircle,
     FiXCircle,
     FiPercent,
 } from 'react-icons/fi';
 
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
+import { SEMORDER } from '@/lib/webkiosk/constants';
+const LoadingSpinner = () => (
+    <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        minH="100vh"
+        w="100vw"
+        maxW="100%"
+        bg="gray.50"
+        gap={6}
+        overflowX="hidden"
+    >
+        <Box textAlign="center">
+            <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#640000"
+                size="xl"
+                mb={4}
+            />
+            <VStack spacing={2}>
+                <Heading size="lg" color="gray.700" fontWeight="medium">
+                    Loading your Subject Marks...
+                </Heading>
+                <Text color="gray.600" fontSize="md">
+                    Your data is being loaded from Cache
+                </Text>
+                <Text color="gray.500" fontSize="sm">
+                    Please wait a moment
+                </Text>
+            </VStack>
+        </Box>
 
-const SEMORDER = ['2223ODDSEM','AUXFEB23','2223EVESEM', 
-  '2324SUMMER', 'AUXAUG23','AUXAUX23','2324ODDSEM','AUXFEB24','2324EVESEM',
-   '2425SUMMER', 'AUXAUG24','AUXAUG24','2425ODDSEM','AUXFEB25','2425EVESEM', '2526SUMMER',
-   'AUXAUG25','AUXAUX25','2526ODDSEM','AUXFEB26','2526EVESEM', '2627SUMMER','AUXAUG26','AUXAUX26'
-   ,'2627ODDSEM','AUXFEB27','2627EVESEM', '2728SUMMER'];
-
+        {/* Aligned bubble animation */}
+        <Box position="relative" w="60px" h="60px">
+            <Box
+                w="60px"
+                h="60px"
+                border="3px solid"
+                borderColor="gray.200"
+                borderRadius="full"
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                m="auto"
+                animation="ping 2s cubic-bezier(0, 0, 0.2, 1) infinite"
+                opacity="0.75"
+            />
+            <Box
+                w="40px"
+                h="40px"
+                bg="#640000"
+                borderRadius="full"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+            >
+                <Icon as={FiBook} color="white" w={5} h={5} />
+            </Box>
+        </Box>
+    </Flex>
+);
 const StatCard = ({ icon, title, value, subtitle, ...props }) => {
     return (
         <Card.Root borderLeft="4px" borderLeftColor="#640000" w="full" {...props}>
@@ -90,7 +149,7 @@ const Dashboard = () => {
                 originalCode: examCode
             };
         }
-        
+
         // Handle regular semester codes (2324ODDSEM, 2324EVESEM)
         if (examCode.includes('SEM')) {
             const year = parseInt(examCode.substring(0, 4));
@@ -103,7 +162,7 @@ const Dashboard = () => {
                 originalCode: examCode
             };
         }
-        
+
         // Handle SUMMER exams (2324SUMMER)
         if (examCode.includes('SUMMER')) {
             const year = parseInt(examCode.substring(0, 4));
@@ -115,7 +174,7 @@ const Dashboard = () => {
                 originalCode: examCode
             };
         }
-        
+
         // Fallback for unknown format
         return {
             year: 0,
@@ -128,21 +187,21 @@ const Dashboard = () => {
     // Calculate available exam codes using SEMORDER for proper sorting
     const availableExamCodes = useMemo(() => {
         const examCodes = [...new Set(marks.map(mark => mark.examCode))];
-        
+
         // Sort exam codes according to SEMORDER (latest first)
         return examCodes.sort((a, b) => {
             const indexA = SEMORDER.indexOf(a);
             const indexB = SEMORDER.indexOf(b);
-            
+
             // If both codes are in SEMORDER, sort by their position (reverse order for latest first)
             if (indexA !== -1 && indexB !== -1) {
                 return indexB - indexA;
             }
-            
+
             // If only one is in SEMORDER, prioritize it
             if (indexA !== -1) return -1;
             if (indexB !== -1) return 1;
-            
+
             // If neither is in SEMORDER, fall back to alphabetical sorting
             return a.localeCompare(b);
         });
@@ -156,8 +215,9 @@ const Dashboard = () => {
         }
     }, [availableExamCodes, isInitialized]);
 
-    if (!data) return null;
-
+    if (!data) {
+        return <LoadingSpinner />;
+    }
     const {
         marks: allMarks,
     } = data;
@@ -171,31 +231,31 @@ const Dashboard = () => {
     // Convert exam codes to readable format
     const formatExamCode = (examCode) => {
         const parsed = parseExamCode(examCode);
-        
+
         if (parsed.type === 'AUX') {
             const yearStr = parsed.year.toString().slice(-2);
             const typeMap = {
                 'FEB': 'Feb Auxiliary',
-                'AUG': 'Aug Auxiliary', 
+                'AUG': 'Aug Auxiliary',
                 'AUX': 'Aug Auxiliary'
             };
             return `${typeMap[parsed.subType] || parsed.subType} '${yearStr}`;
         }
-        
+
         if (parsed.type === 'SEM') {
             const yearStr = parsed.year.toString();
             const startYear = yearStr.substring(0, 2);
             const endYear = yearStr.substring(2, 4);
             return `20${startYear}-20${endYear} ${parsed.subType === 'ODD' ? 'Odd' : 'Even'} Sem`;
         }
-        
+
         if (parsed.type === 'SUMMER') {
             const yearStr = parsed.year.toString();
             const startYear = yearStr.substring(0, 2);
             const endYear = yearStr.substring(2, 4);
             return `20${startYear}-20${endYear} Summer`;
         }
-        
+
         return examCode; // fallback
     };
 

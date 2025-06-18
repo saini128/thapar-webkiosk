@@ -1,6 +1,5 @@
 'use client';
-
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Box,
     Flex,
@@ -9,13 +8,9 @@ import {
     Text,
     Card,
     Stat,
-    Table,
     Badge,
-    Tabs,
     Icon,
-    Container,
     VStack,
-    HStack,
     Spinner,
 } from '@chakra-ui/react';
 import {
@@ -28,72 +23,77 @@ import {
 } from 'react-icons/fi';
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
-
-// Semester order definition
-const SEMORDER = ['2223ODDSEM', 'AUXFEB23', '2223EVESEM', '2324SUMMER', 'AUXAUG23', 'AUXAUX23', '2324ODDSEM', 'AUXFEB24', '2324EVESEM', '2425SUMMER', 'AUXAUG24', 'AUXAUG24', '2425ODDSEM', 'AUXFEB25', '2425EVESEM', '2526SUMMER', 'AUXAUG25', 'AUXAUX25', '2526ODDSEM', 'AUXFEB26', '2526EVESEM', '2627SUMMER', 'AUXAUG26', 'AUXAUX26', '2627ODDSEM', 'AUXFEB27', '2627EVESEM', '2728SUMMER'];
+import { SEMORDER }  from '@/lib/webkiosk/constants';
 
 // Loading Component
 const LoadingSpinner = () => (
-    <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        minH="100vh"
-        w="100vw"
-        maxW="100%"
-        bg="gray.50"
-        gap={6}
-        overflowX="hidden"
-    >
-        <Box textAlign="center">
-            <Spinner
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="#640000"
-                size="xl"
-                mb={4}
-            />
-            <VStack spacing={2}>
-                <Heading size="lg" color="gray.700" fontWeight="medium">
-                    Loading your dashboard...
-                </Heading>
-                <Text color="gray.600" fontSize="md">
-                    Your data is being loaded from OG Webkiosk
-                </Text>
-                <Text color="gray.500" fontSize="sm">
-                    Please wait a moment
-                </Text>
-            </VStack>
-        </Box>
-        
-        {/* Optional: Add some visual enhancement */}
-        <Box position="relative">
-            <Box
-                w="60px"
-                h="60px"
-                border="3px solid"
-                borderColor="gray.200"
-                borderRadius="full"
-                position="absolute"
-                top="-30px"
-                left="-30px"
-                animation="ping 2s cubic-bezier(0, 0, 0.2, 1) infinite"
-                opacity="0.75"
-            />
-            <Box
-                w="40px"
-                h="40px"
-                bg="#640000"
-                borderRadius="full"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-            >
-                <Icon as={FiBook} color="white" w={5} h={5} />
-            </Box>
-        </Box>
-    </Flex>
+  <Flex
+    direction="column"
+    align="center"
+    justify="center"
+    minH="100vh"
+    w="100vw"
+    maxW="100%"
+    bg="gray.50"
+    gap={6}
+    overflowX="hidden"
+  >
+    <Box textAlign="center">
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="#640000"
+        size="xl"
+        mb={4}
+      />
+      <VStack spacing={2}>
+        <Heading size="lg" color="gray.700" fontWeight="medium">
+          Loading your dashboard...
+        </Heading>
+        <Text color="gray.600" fontSize="md">
+          Your data is being loaded from OG Webkiosk
+        </Text>
+        <Text color="gray.500" fontSize="sm">
+          Please wait a moment
+        </Text>
+      </VStack>
+    </Box>
+
+    {/* Aligned bubble animation */}
+    <Box position="relative" w="60px" h="60px">
+      <Box
+        w="60px"
+        h="60px"
+        border="3px solid"
+        borderColor="gray.200"
+        borderRadius="full"
+        position="absolute"
+        top="0"
+        left="0"
+        right="0"
+        bottom="0"
+        m="auto"
+        animation="ping 2s cubic-bezier(0, 0, 0.2, 1) infinite"
+        opacity="0.75"
+      />
+      <Box
+        w="40px"
+        h="40px"
+        bg="#640000"
+        borderRadius="full"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        position="absolute"
+        top="50%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+      >
+        <Icon as={FiBook} color="white" w={5} h={5} />
+      </Box>
+    </Box>
+  </Flex>
 );
 
 // Enhanced Grade Distribution Card Component

@@ -7,17 +7,15 @@ import {
     Grid,
     Heading,
     Text,
+    Spinner,
     Card,
     Stat,
-    Table,
     Badge,
-    Tabs,
     Icon,
-    Container,
     VStack,
     HStack,
     Button,
-    ButtonGroup,
+
 } from '@chakra-ui/react';
 
 import {
@@ -26,13 +24,77 @@ import {
 } from 'react-icons/fi';
 import { useDashboard } from '@/context/dashboardContext';
 import { Topbar } from '@/components/Topbar';
+import { SEMORDER } from '@/lib/webkiosk/constants';
 
-const SEMORDER = ['2223ODDSEM','AUXFEB23','2223EVESEM', 
-  '2324SUMMER', 'AUXAUG23','AUXAUX23','2324ODDSEM','AUXFEB24','2324EVESEM',
-   '2425SUMMER', 'AUXAUG24','AUXAUG24','2425ODDSEM','AUXFEB25','2425EVESEM', '2526SUMMER',
-   'AUXAUG25','AUXAUX25','2526ODDSEM','AUXFEB26','2526EVESEM', '2627SUMMER','AUXAUG26','AUXAUX26'
-   ,'2627ODDSEM','AUXFEB27','2627EVESEM', '2728SUMMER'];
+const LoadingSpinner = () => (
+    <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        minH="100vh"
+        w="100vw"
+        maxW="100%"
+        bg="gray.50"
+        gap={6}
+        overflowX="hidden"
+    >
+        <Box textAlign="center">
+            <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#640000"
+                size="xl"
+                mb={4}
+            />
+            <VStack spacing={2}>
+                <Heading size="lg" color="gray.700" fontWeight="medium">
+                    Loading your Grades...
+                </Heading>
+                <Text color="gray.600" fontSize="md">
+                    Your data is being loaded from Cache
+                </Text>
+                <Text color="gray.500" fontSize="sm">
+                    Please wait a moment
+                </Text>
+            </VStack>
+        </Box>
 
+        {/* Aligned bubble animation */}
+        <Box position="relative" w="60px" h="60px">
+            <Box
+                w="60px"
+                h="60px"
+                border="3px solid"
+                borderColor="gray.200"
+                borderRadius="full"
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                m="auto"
+                animation="ping 2s cubic-bezier(0, 0, 0.2, 1) infinite"
+                opacity="0.75"
+            />
+            <Box
+                w="40px"
+                h="40px"
+                bg="#640000"
+                borderRadius="full"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+            >
+                <Icon as={FiBook} color="white" w={5} h={5} />
+            </Box>
+        </Box>
+    </Flex>
+);
 const StatCard = ({ icon, title, value, subtitle, ...props }) => {
     return (
         <Card.Root borderLeft="4px" borderLeftColor="#640000" w="full" {...props}>
@@ -77,12 +139,12 @@ const Dashboard = () => {
         return codes.sort((a, b) => {
             const indexA = SEMORDER.indexOf(a);
             const indexB = SEMORDER.indexOf(b);
-            
+
             // If both codes are in SEMORDER, sort by their position (latest first - reverse order)
             if (indexA !== -1 && indexB !== -1) {
                 return indexB - indexA;
             }
-            
+
             // If only one code is in SEMORDER, prioritize it
             if (indexA !== -1 && indexB === -1) {
                 return -1;
@@ -90,7 +152,7 @@ const Dashboard = () => {
             if (indexA === -1 && indexB !== -1) {
                 return 1;
             }
-            
+
             // If neither code is in SEMORDER, maintain original order
             return 0;
         });
@@ -111,8 +173,9 @@ const Dashboard = () => {
     }, [availableSemesters, isInitialized]);
 
     // Optional render null if no usable data yet
-    if (!data) return null;
-
+    if (!data) {
+        return <LoadingSpinner />;
+    }
     // Convert exam codes to readable format
     const formatSemester = (examCode) => {
         // Handle AUX codes
@@ -123,13 +186,13 @@ const Dashboard = () => {
                 const fullYear = 2000 + parseInt(year);
                 const typeMap = {
                     'FEB': 'Feb Auxiliary',
-                    'AUG': 'Aug Auxiliary', 
+                    'AUG': 'Aug Auxiliary',
                     'AUX': 'Aug Auxiliary'
                 };
                 return `${fullYear} ${typeMap[type]}`;
             }
         }
-        
+
         // Handle regular semester codes
         const match = examCode.match(/^(\d{4})(ODD|EVE|SUMMER)(?:SEM|M?SEM)?$/);
         if (match) {
@@ -137,16 +200,16 @@ const Dashboard = () => {
             const startYear = parseInt(yearStr.substring(0, 2));
             const endYear = parseInt(yearStr.substring(2, 4));
             const academicYear = `20${startYear}-20${endYear}`;
-            
+
             const typeMap = {
                 'ODD': 'Odd Semester',
                 'EVE': 'Even Semester',
                 'SUMMER': 'Summer'
             };
-            
+
             return `${academicYear} ${typeMap[semType]}`;
         }
-        
+
         // Fallback for unrecognized format
         return examCode;
     };
